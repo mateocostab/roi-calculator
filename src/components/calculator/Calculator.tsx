@@ -650,7 +650,7 @@ export function Calculator() {
                 background: 'linear-gradient(90deg, transparent, rgba(255, 100, 50, 0.6), rgba(255, 150, 50, 0.8), rgba(255, 100, 50, 0.6), transparent)',
               }} />
 
-              {/* Content - matching green card alignment */}
+              {/* Content */}
               <div style={{ position: 'relative' }}>
                 <p style={{
                   margin: 0,
@@ -663,26 +663,36 @@ export function Calculator() {
                 }}>
                   {t('loss.title')}
                 </p>
-                <p style={{
-                  margin: 0,
-                  fontSize: 'clamp(24px, 3vw, 32px)',
-                  fontWeight: 700,
-                  color: '#ff9944',
-                  fontFamily: "'Space Mono', monospace",
-                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-                }}>
-                  {formatCurrency(calc.additionalMonthlyRevenue)}
-                </p>
-                <p style={{ margin: '2px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.5)' }}>
-                  {t('loss.monthly')}
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 180, 130, 0.4)', marginBottom: 2 }}>
-                      {t('loss.annually')}
+                    <p style={{
+                      margin: 0,
+                      fontSize: 'clamp(24px, 3vw, 32px)',
+                      fontWeight: 700,
+                      color: '#ff9944',
+                      fontFamily: "'Space Mono', monospace",
+                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                    }}>
+                      {formatCurrency(calc.additionalMonthlyRevenue)}
                     </p>
-                    <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#ff7744' }}>
+                    <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.5)' }}>
+                      {t('loss.monthly')}
+                    </p>
+                  </div>
+                  <div style={{ width: 1, height: 40, background: 'linear-gradient(180deg, transparent, rgba(255, 120, 60, 0.4), transparent)' }} />
+                  <div>
+                    <p style={{
+                      margin: 0,
+                      fontSize: 'clamp(24px, 3vw, 32px)',
+                      fontWeight: 700,
+                      color: '#ff6633',
+                      fontFamily: "'Space Mono', monospace",
+                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                    }}>
                       {formatCurrency(calc.additionalMonthlyRevenue * 12)}
+                    </p>
+                    <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.5)' }}>
+                      {t('loss.annually')}
                     </p>
                   </div>
                 </div>
