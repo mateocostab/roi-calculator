@@ -176,26 +176,26 @@ describe('calculateScaledState', () => {
     adSpend: 10000,
   };
 
-  it('calculates scaled state with gradual implementation curve and ongoing 2%', () => {
+  it('calculates scaled state with gradual implementation curve and ongoing 1%', () => {
     const result = calculateScaledState(baseMetrics, 'expected', 0, 6);
     // New multiplier: expected = 1.25 (+25%)
-    // Gradual implementation + ongoing 2% linear improvement after month 3
+    // Gradual implementation + ongoing 1% linear improvement after month 3
     // Month 1: +6.25% → CVR 2.65625 → revenue 106250
     // Month 2: +15% → CVR 2.875 → revenue 115000
     // Month 3: +25% → CVR 3.125 → revenue 125000
-    // Month 4: +27% → CVR 3.175 → revenue 127000
-    // Month 5: +29% → CVR 3.225 → revenue 129000
-    // Month 6: +31% → CVR 3.275 → revenue 131000
-    // Total: 106250 + 115000 + 125000 + 127000 + 129000 + 131000 = 733250
-    expect(result.totalRevenue).toBe(733250);
+    // Month 4: +26% → CVR 3.15 → revenue 126000
+    // Month 5: +27% → CVR 3.175 → revenue 127000
+    // Month 6: +28% → CVR 3.2 → revenue 128000
+    // Total: 106250 + 115000 + 125000 + 126000 + 127000 + 128000 = 727250
+    expect(result.totalRevenue).toBe(727250);
   });
 
-  it('calculates additional revenue with gradual implementation and ongoing 2%', () => {
+  it('calculates additional revenue with gradual implementation and ongoing 1%', () => {
     const result = calculateScaledState(baseMetrics, 'expected', 0, 6);
     // Current monthly: 100000
-    // Additional per month: 6250, 15000, 25000, 27000, 29000, 31000
-    // Total: 133250
-    expect(result.totalAdditionalRevenue).toBe(133250);
+    // Additional per month: 6250, 15000, 25000, 26000, 27000, 28000
+    // Total: 127250
+    expect(result.totalAdditionalRevenue).toBe(127250);
   });
 
   it('compounds revenue with reinvestment', () => {
@@ -212,15 +212,15 @@ describe('calculateScaledState', () => {
     expect(result.totalAdSpent).toBe(60000);
   });
 
-  it('applies ongoing 2% CVR improvement after month 3 (linear)', () => {
+  it('applies ongoing 1% CVR improvement after month 3 (linear)', () => {
     // Test with 0% reinvestment to isolate CVR improvement effect
     const result = calculateScaledState(baseMetrics, 'expected', 0, 6);
     // Month 3 improvement: +25% (multiplier 1.25)
-    // Month 4: +25% + 2% = +27%
-    // Month 5: +25% + 4% = +29%
-    // Month 6: +25% + 6% = +31% → CVR = 2.5 * 1.31 = 3.275
+    // Month 4: +25% + 1% = +26%
+    // Month 5: +25% + 2% = +27%
+    // Month 6: +25% + 3% = +28% → CVR = 2.5 * 1.28 = 3.2
     // Linear growth avoids double-exponential when combined with reinvestment
-    expect(result.cvr).toBeCloseTo(3.275, 2);
+    expect(result.cvr).toBeCloseTo(3.2, 2);
   });
 
   it('ROI stays reasonable with 50% reinvestment over 6 months', () => {
@@ -263,22 +263,22 @@ describe('generateProjectionData', () => {
     });
   });
 
-  it('improved revenue follows gradual implementation curve with ongoing 2% improvement', () => {
+  it('improved revenue follows gradual implementation curve with ongoing 1% improvement', () => {
     const data = generateProjectionData(baseMetrics, 'expected', 0, 6);
     // New multiplier: expected = 1.25
     // Month 1: 25% of improvement → CVR 2.5 * (1 + 0.25*0.25) = 2.65625 → revenue 106250
     // Month 2: 60% of improvement → CVR 2.5 * (1 + 0.25*0.60) = 2.875 → revenue 115000
     // Month 3: 100% of improvement → CVR 2.5 * 1.25 = 3.125 → revenue 125000
-    // Month 4+: CVR compounds by 2% monthly after month 3
-    // Month 4: CVR 3.125 * 1.02 = 3.1875 → revenue 127500
-    // Month 5: CVR 3.125 * 1.02^2 = 3.25125 → revenue 130050
-    // Month 6: CVR 3.125 * 1.02^3 = 3.3162... → revenue ~132651
+    // Month 4+: CVR compounds by 1% monthly after month 3
+    // Month 4: CVR 3.125 * 1.01 = 3.15625 → revenue 126250
+    // Month 5: CVR 3.125 * 1.01^2 = 3.1878... → revenue ~127512.5
+    // Month 6: CVR 3.125 * 1.01^3 = 3.2197... → revenue ~128787.6
     expect(data[0].improved).toBe(106250);
     expect(data[1].improved).toBe(115000);
     expect(data[2].improved).toBe(125000);
-    expect(data[3].improved).toBe(127500);
-    expect(data[4].improved).toBeCloseTo(130050, 0);
-    expect(data[5].improved).toBeCloseTo(132651, 0);
+    expect(data[3].improved).toBe(126250);
+    expect(data[4].improved).toBeCloseTo(127512.5, 0);
+    expect(data[5].improved).toBeCloseTo(128787.6, 0);
   });
 
   it('cumulative values increase over time', () => {
@@ -298,47 +298,59 @@ describe('generateProjectionData', () => {
 });
 
 describe('calculateROI', () => {
-  // Note: calculateROI now takes totalAdditionalRevenue directly (accounting for gradual curve)
-  // Third parameter is the TOTAL additional revenue, not monthly
+  // Note: calculateROI now takes totalAdditionalRevenue and projectionData
+  // It calculates payback using the real implementation curve from projectionData
+
+  // Mock projection data for testing
+  const mockProjectionData = [
+    { month: 1, current: 100000, improved: 106250, scaled: 106250, currentCumulative: 100000, improvedCumulative: 106250, scaledCumulative: 106250 },
+    { month: 2, current: 100000, improved: 115000, scaled: 115000, currentCumulative: 200000, improvedCumulative: 221250, scaledCumulative: 221250 },
+    { month: 3, current: 100000, improved: 125000, scaled: 125000, currentCumulative: 300000, improvedCumulative: 346250, scaledCumulative: 346250 },
+    { month: 4, current: 100000, improved: 126250, scaled: 126250, currentCumulative: 400000, improvedCumulative: 472500, scaledCumulative: 472500 },
+    { month: 5, current: 100000, improved: 127500, scaled: 127500, currentCumulative: 500000, improvedCumulative: 600000, scaledCumulative: 600000 },
+    { month: 6, current: 100000, improved: 128750, scaled: 128750, currentCumulative: 600000, improvedCumulative: 728750, scaledCumulative: 728750 },
+  ];
 
   it('calculates total investment correctly', () => {
-    const result = calculateROI(3000, 6, 300000);
+    const result = calculateROI(3000, 6, 128750, mockProjectionData);
     // 3000 * 6 = 18000
     expect(result.totalInvestment).toBe(18000);
   });
 
   it('passes through total additional revenue', () => {
-    const result = calculateROI(3000, 6, 300000);
-    // Total is passed directly, not multiplied
-    expect(result.totalAdditionalRevenue).toBe(300000);
+    const result = calculateROI(3000, 6, 128750, mockProjectionData);
+    expect(result.totalAdditionalRevenue).toBe(128750);
   });
 
   it('calculates ROI multiple correctly', () => {
-    const result = calculateROI(3000, 6, 300000);
-    // 300000 / 18000 = 16.67
-    expect(result.roiMultiple).toBeCloseTo(16.67, 2);
+    const result = calculateROI(3000, 6, 128750, mockProjectionData);
+    // 128750 / 18000 = 7.15
+    expect(result.roiMultiple).toBeCloseTo(7.15, 2);
   });
 
   it('calculates ROI percent correctly', () => {
-    const result = calculateROI(3000, 6, 300000);
-    // 16.67 * 100 = 1666.67%
-    expect(result.roiPercent).toBeCloseTo(1666.67, 2);
+    const result = calculateROI(3000, 6, 128750, mockProjectionData);
+    // 7.15 * 100 = 715%
+    expect(result.roiPercent).toBeCloseTo(715.28, 2);
   });
 
-  it('calculates payback period using average monthly revenue', () => {
-    const result = calculateROI(3000, 6, 300000);
-    // Average monthly: 300000 / 6 = 50000
-    // Payback: 3000 / 50000 = 0.06 months
-    expect(result.paybackMonths).toBeCloseTo(0.06, 2);
+  it('calculates payback period using cumulative curve', () => {
+    // With croInvestment = 3000:
+    // Month 1: accumulated = 6250
+    // Need to find when accumulated >= 3000
+    // Month 1 additional = 6250, so payback = 3000/6250 = 0.48 months
+    const result = calculateROI(3000, 6, 128750, mockProjectionData);
+    expect(result.paybackMonths).toBeCloseTo(0.48, 2);
   });
 
   it('handles zero investment (ROI = 0)', () => {
-    const result = calculateROI(0, 6, 300000);
+    const result = calculateROI(0, 6, 128750, mockProjectionData);
     expect(result.roiMultiple).toBe(0);
   });
 
   it('handles zero additional revenue (payback = Infinity)', () => {
-    const result = calculateROI(3000, 6, 0);
+    const zeroRevenueData = mockProjectionData.map(p => ({ ...p, improved: p.current }));
+    const result = calculateROI(3000, 6, 0, zeroRevenueData);
     expect(result.paybackMonths).toBe(Infinity);
   });
 });
@@ -421,7 +433,7 @@ describe('Integration Test - Full Calculator Flow', () => {
       0
     );
 
-    // Should be realistic: ~$136K additional over 6 months
+    // Should be realistic: ~$128K additional over 6 months (with 1% monthly improvement)
     expect(totalAdditionalRevenueFromImproved).toBeGreaterThan(100000);
     expect(totalAdditionalRevenueFromImproved).toBeLessThan(200000);
 
@@ -429,7 +441,8 @@ describe('Integration Test - Full Calculator Flow', () => {
     const roiMetrics = calculateROI(
       DEFAULT_CRO_INVESTMENT,
       DEFAULT_MONTHS,
-      totalAdditionalRevenueFromImproved
+      totalAdditionalRevenueFromImproved,
+      projectionData
     );
 
     // ROI should be reasonable (not 5000x!)

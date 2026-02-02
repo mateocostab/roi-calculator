@@ -73,29 +73,22 @@ export function Calculator() {
     croInvestmentValueRef.current = calc.inputs.croInvestment;
   }, [calc.inputs.aov, calc.inputs.adSpend, calc.inputs.croInvestment]);
 
-  // Convert monetary inputs when currency changes
+  // Reset monetary inputs to defaults when currency changes
   useEffect(() => {
     const prevCurrency = prevCurrencyRef.current;
     if (prevCurrency !== currency) {
-      const prevConfig = CURRENCIES.find(c => c.code === prevCurrency);
-      const newConfig = CURRENCIES.find(c => c.code === currency);
+      // Reset to default values converted to new currency
+      const newAov = convertFromUSD(INPUT_RANGES.aov.default);
+      const newAdSpend = convertFromUSD(INPUT_RANGES.adSpend.default);
+      const newCroInvestment = convertFromUSD(INPUT_RANGES.croInvestment.default);
 
-      if (prevConfig && newConfig) {
-        // Convert from previous currency to new currency
-        const conversionRate = newConfig.exchangeRate / prevConfig.exchangeRate;
-
-        const newAov = Math.round(aovValueRef.current * conversionRate);
-        const newAdSpend = Math.round(adSpendValueRef.current * conversionRate);
-        const newCroInvestment = Math.round(croInvestmentValueRef.current * conversionRate);
-
-        calc.setAov(newAov);
-        calc.setAdSpend(newAdSpend);
-        calc.setCroInvestment(newCroInvestment);
-      }
+      calc.setAov(newAov);
+      calc.setAdSpend(newAdSpend);
+      calc.setCroInvestment(newCroInvestment);
 
       prevCurrencyRef.current = currency;
     }
-  }, [currency, calc.setAov, calc.setAdSpend, calc.setCroInvestment]);
+  }, [currency, calc.setAov, calc.setAdSpend, calc.setCroInvestment, convertFromUSD]);
 
   // Currency-converted ranges for monetary inputs
   const ranges = useMemo(() => ({

@@ -147,7 +147,7 @@ describe('All Currencies - Calculation Consistency', () => {
   const usdCurrent = calculateCurrentState(BASE_USD);
   const usdProjection = generateProjectionData(BASE_USD, 'expected', 0, 6);
   const usdAdditional = usdProjection.reduce((sum, p) => sum + (p.improved - p.current), 0);
-  const usdROI = calculateROI(CRO_INVESTMENT_USD, 6, usdAdditional);
+  const usdROI = calculateROI(CRO_INVESTMENT_USD, 6, usdAdditional, usdProjection);
 
   CURRENCIES.forEach(currency => {
     describe(`${currency.code} (rate: ${currency.exchangeRate})`, () => {
@@ -167,7 +167,7 @@ describe('All Currencies - Calculation Consistency', () => {
         const improved = calculateImprovedState(store, 'expected');
         const projection = generateProjectionData(store, 'expected', 50, 6);
         const additional = projection.reduce((sum, p) => sum + (p.improved - p.current), 0);
-        const roi = calculateROI(croInvestment, 6, additional);
+        const roi = calculateROI(croInvestment, 6, additional, projection);
 
         expect(isFinite(current.revenue)).toBe(true);
         expect(isFinite(current.roas)).toBe(true);
@@ -187,7 +187,7 @@ describe('All Currencies - Calculation Consistency', () => {
       it('maintains consistent ROI ratio', () => {
         const projection = generateProjectionData(store, 'expected', 0, 6);
         const additional = projection.reduce((sum, p) => sum + (p.improved - p.current), 0);
-        const roi = calculateROI(croInvestment, 6, additional);
+        const roi = calculateROI(croInvestment, 6, additional, projection);
         // ROI should be identical regardless of currency
         expect(roi.roiMultiple).toBeCloseTo(usdROI.roiMultiple, 1);
       });

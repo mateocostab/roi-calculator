@@ -45,9 +45,9 @@ export function getImplementationFactor(month: number): number {
 export const CVR_DEGRADATION_FACTOR = 0.3;
 
 // Monthly CVR improvement after implementation (month 3+)
-// CRO work continues - ongoing optimization improves CVR by ~2% each month
-// Based on Dylan's benchmark data
-export const MONTHLY_CVR_IMPROVEMENT = 0.02;
+// CRO work continues - ongoing optimization improves CVR by ~1% each month
+// Conservative estimate for realistic sales projections
+export const MONTHLY_CVR_IMPROVEMENT = 0.01;
 
 export const SCENARIOS: ScenarioConfig[] = [
   { id: 'conservative', multiplier: 1.15, labelKey: 'scenarios.conservative' },

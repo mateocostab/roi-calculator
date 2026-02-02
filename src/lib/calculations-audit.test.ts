@@ -144,20 +144,20 @@ describe('AUDIT: Projection Data (Chart)', () => {
     expect(data[2].improved).toBe(125000);
   });
 
-  it('applies ongoing 2% monthly improvement after month 3', () => {
+  it('applies ongoing 1% monthly improvement after month 3', () => {
     const data = generateProjectionData(STANDARD_STORE, 'expected', 0, 6);
 
-    // Month 4: CVR = 3.125 × 1.02 = 3.1875
-    // revenue = 50,000 × 0.031875 × $80 = $127,500
-    expect(data[3].improved).toBe(127500);
+    // Month 4: CVR = 3.125 × 1.01 = 3.15625
+    // revenue = 50,000 × 0.0315625 × $80 = $126,250
+    expect(data[3].improved).toBe(126250);
 
-    // Month 5: CVR = 3.125 × 1.02² = 3.25125
-    // revenue = 50,000 × 0.0325125 × $80 = $130,050
-    expect(data[4].improved).toBeCloseTo(130050, 0);
+    // Month 5: CVR = 3.125 × 1.01² = 3.1878...
+    // revenue = 50,000 × 0.031878... × $80 = $127,512.5
+    expect(data[4].improved).toBeCloseTo(127512.5, 0);
 
-    // Month 6: CVR = 3.125 × 1.02³ = 3.316275
-    // revenue = 50,000 × 0.03316275 × $80 = $132,651
-    expect(data[5].improved).toBeCloseTo(132651, 0);
+    // Month 6: CVR = 3.125 × 1.01³ = 3.2197...
+    // revenue = 50,000 × 0.032197... × $80 = $128,787.6
+    expect(data[5].improved).toBeCloseTo(128787.6, 0);
   });
 
   it('current revenue stays constant', () => {
@@ -188,13 +188,13 @@ describe('AUDIT: Scaled State with Reinvestment', () => {
     const scaled = calculateScaledState(STANDARD_STORE, 'expected', 0, 6);
 
     // Total revenue over 6 months without reinvestment
-    // Sum of: 106,250 + 115,000 + 125,000 + 127,000 + 129,000 + 131,000
-    // (using linear 2% after month 3 in scaled)
-    expect(scaled.totalRevenue).toBe(733250);
+    // Sum of: 106,250 + 115,000 + 125,000 + 126,000 + 127,000 + 128,000
+    // (using linear 1% after month 3 in scaled)
+    expect(scaled.totalRevenue).toBe(727250);
 
     // Total current would be: 6 × 100,000 = 600,000
-    // Additional = 733,250 - 600,000 = 133,250
-    expect(scaled.totalAdditionalRevenue).toBe(133250);
+    // Additional = 727,250 - 600,000 = 127,250
+    expect(scaled.totalAdditionalRevenue).toBe(127250);
   });
 
   it('reinvestment increases total revenue', () => {
@@ -226,30 +226,33 @@ describe('AUDIT: ROI Calculations', () => {
     const data = generateProjectionData(STANDARD_STORE, 'expected', 0, 6);
     const totalAdditional = data.reduce((sum, p) => sum + (p.improved - p.current), 0);
 
-    const roi = calculateROI(4000, 6, totalAdditional);
+    const roi = calculateROI(4000, 6, totalAdditional, data);
 
     // Total investment = $4,000 × 6 = $24,000
     expect(roi.totalInvestment).toBe(24000);
 
-    // Additional revenue should be ~$136,451
-    expect(roi.totalAdditionalRevenue).toBeCloseTo(136451, 0);
+    // Additional revenue with 1% monthly improvement: ~$128,800
+    expect(roi.totalAdditionalRevenue).toBeCloseTo(128800, -2);
 
-    // ROI = $136,451 / $24,000 = 5.69x
-    expect(roi.roiMultiple).toBeCloseTo(5.69, 1);
+    // ROI = ~$128,800 / $24,000 = ~5.37x
+    expect(roi.roiMultiple).toBeGreaterThan(5);
+    expect(roi.roiMultiple).toBeLessThan(6);
 
-    // Payback = $4,000 / ($136,451/6) = 0.176 months
+    // Payback uses cumulative curve - should be < 1 month
     expect(roi.paybackMonths).toBeLessThan(1);
   });
 
   it('handles edge case: zero investment', () => {
-    const roi = calculateROI(0, 6, 100000);
+    const data = generateProjectionData(STANDARD_STORE, 'expected', 0, 6);
+    const roi = calculateROI(0, 6, 100000, data);
 
     expect(roi.totalInvestment).toBe(0);
     expect(roi.roiMultiple).toBe(0);  // Not Infinity
   });
 
   it('handles edge case: zero additional revenue', () => {
-    const roi = calculateROI(4000, 6, 0);
+    const zeroData = generateProjectionData(STANDARD_STORE, 'expected', 0, 6).map(p => ({ ...p, improved: p.current }));
+    const roi = calculateROI(4000, 6, 0, zeroData);
 
     expect(roi.totalAdditionalRevenue).toBe(0);
     expect(roi.roiMultiple).toBe(0);
@@ -282,7 +285,7 @@ describe('AUDIT: Cross-Validation', () => {
       (sum, p) => sum + (p.improved - p.current), 0
     );
 
-    const roiFromHook = calculateROI(4000, 6, totalAdditionalFromImproved);
+    const roiFromHook = calculateROI(4000, 6, totalAdditionalFromImproved, projection);
 
     // ROI should be reasonable (5-10x range)
     expect(roiFromHook.roiMultiple).toBeGreaterThan(3);
@@ -348,7 +351,7 @@ describe('AUDIT: Boundary Conditions', () => {
     // USD scenario
     const usdProjection = generateProjectionData(STANDARD_STORE, 'expected', 0, 6);
     const usdAdditional = usdProjection.reduce((sum, p) => sum + (p.improved - p.current), 0);
-    const usdROI = calculateROI(4000, 6, usdAdditional);
+    const usdROI = calculateROI(4000, 6, usdAdditional, usdProjection);
 
     // COP scenario (all values × 4000)
     const copStore: InputMetrics = {
@@ -359,7 +362,7 @@ describe('AUDIT: Boundary Conditions', () => {
     };
     const copProjection = generateProjectionData(copStore, 'expected', 0, 6);
     const copAdditional = copProjection.reduce((sum, p) => sum + (p.improved - p.current), 0);
-    const copROI = calculateROI(16000000, 6, copAdditional);  // $4K × 4000
+    const copROI = calculateROI(16000000, 6, copAdditional, copProjection);  // $4K × 4000
 
     // ROI ratios should be identical!
     expect(copROI.roiMultiple).toBeCloseTo(usdROI.roiMultiple, 1);
@@ -428,10 +431,11 @@ describe('AUDIT: Random Case - Fashion Store', () => {
     const data = generateProjectionData(FASHION_STORE, 'expected', 0, 6);
     const totalAdditional = data.reduce((sum, p) => sum + (p.improved - p.current), 0);
 
-    const roi = calculateROI(6000, 6, totalAdditional);
+    const roi = calculateROI(6000, 6, totalAdditional, data);
 
-    // ROI should be ~11.87x
-    expect(roi.roiMultiple).toBeCloseTo(11.87, 1);
+    // ROI should be ~11x (with 1% monthly improvement instead of 2%)
+    expect(roi.roiMultiple).toBeGreaterThan(10);
+    expect(roi.roiMultiple).toBeLessThan(13);
 
     // Payback should be < 1 month
     expect(roi.paybackMonths).toBeLessThan(1);

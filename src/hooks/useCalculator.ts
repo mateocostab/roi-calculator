@@ -108,9 +108,10 @@ export function useCalculator() {
     () => calculateROI(
       inputs.croInvestment,
       inputs.projectionMonths,
-      totalAdditionalRevenueWithCurve
+      totalAdditionalRevenueWithCurve,
+      projectionData
     ),
-    [inputs.croInvestment, inputs.projectionMonths, totalAdditionalRevenueWithCurve]
+    [inputs.croInvestment, inputs.projectionMonths, totalAdditionalRevenueWithCurve, projectionData]
   );
 
   const qualificationTier = useMemo(
