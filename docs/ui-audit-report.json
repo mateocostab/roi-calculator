@@ -1,0 +1,154 @@
+{
+  "title": "ROI Calculator — Main Interface",
+  "project": "ConvertMate CRO ROI Calculator",
+  "date": "2026-02-01",
+  "auditor": "Claude Code",
+
+  "macro_bets": [
+    {
+      "category": "accuracy",
+      "description": "Provide accurate ROI projections with realistic scaling models",
+      "alignment": "strong"
+    },
+    {
+      "category": "velocity",
+      "description": "Quick deployment using Next.js + existing component patterns",
+      "alignment": "strong"
+    }
+  ],
+
+  "jtbd": [
+    {
+      "user": "E-commerce Manager",
+      "situation": "evaluating CRO investment for budget approval",
+      "motivation": "see concrete ROI projections",
+      "outcome": "justify CRO spend to stakeholders"
+    },
+    {
+      "user": "Agency Sales",
+      "situation": "presenting to potential client",
+      "motivation": "demonstrate potential value of CRO services",
+      "outcome": "close deals with data-backed projections"
+    }
+  ],
+
+  "visual_hierarchy": {
+    "title": "Visual Hierarchy",
+    "checks": [
+      { "label": "Heading distinction", "status": "pass", "notes": "Clear h1 with gradient text, section headers with dots" },
+      { "label": "Primary action clarity", "status": "pass", "notes": "Green CTAs stand out against dark background" },
+      { "label": "Grouping/proximity", "status": "pass", "notes": "Glass cards create clear sections" },
+      { "label": "Reading flow", "status": "pass", "notes": "Left-to-right, top-to-bottom natural flow" },
+      { "label": "Type scale", "status": "pass", "notes": "Clear hierarchy: 48px metrics > 28px values > 15px labels" },
+      { "label": "Color hierarchy", "status": "pass", "notes": "Green for positive/CRO, Purple for scaling, Gray for current" },
+      { "label": "Whitespace usage", "status": "pass", "notes": "Generous padding (48px container, 32px sections)" },
+      { "label": "Chart implementation period", "status": "pass", "notes": "Shaded zone + vertical line highlights first 3 months" }
+    ]
+  },
+
+  "visual_style": {
+    "title": "Visual Style",
+    "checks": [
+      { "label": "Spacing consistency", "status": "pass", "notes": "Consistent 8px base unit throughout" },
+      { "label": "Color palette adherence", "status": "pass", "notes": "Green #00ff84, Purple #8b5cf6, consistent usage" },
+      { "label": "Elevation/shadows", "status": "pass", "notes": "Layered shadows on cards and buttons" },
+      { "label": "Typography system", "status": "pass", "notes": "DM Sans for display, Space Mono for numbers" },
+      { "label": "Border/radius consistency", "status": "pass", "notes": "20px cards, 12px inputs, 100px pills" },
+      { "label": "Icon style", "status": "na", "notes": "Minimal icon usage" },
+      { "label": "Motion principles", "status": "pass", "notes": "Subtle transitions, respects prefers-reduced-motion" },
+      { "label": "Glassmorphism execution", "status": "pass", "notes": "Consistent blur + transparency + borders" }
+    ]
+  },
+
+  "accessibility": {
+    "title": "Accessibility",
+    "checks": [
+      { "label": "Keyboard operability", "status": "pass", "notes": "All inputs and buttons keyboard accessible" },
+      { "label": "Visible focus states", "status": "pass", "notes": "Green ring on focus for inputs" },
+      { "label": "Color contrast (4.5:1)", "status": "warn", "notes": "Labels improved to 0.7 opacity, some sublabels still borderline" },
+      { "label": "Touch targets (44px)", "status": "pass", "notes": "Buttons increased to 44px+ height" },
+      { "label": "Reduced motion support", "status": "pass", "notes": "@media (prefers-reduced-motion) implemented" },
+      { "label": "Semantic markup", "status": "pass", "notes": "Proper heading hierarchy, button elements" },
+      { "label": "ARIA labels", "status": "pass", "notes": "aria-label on sliders, aria-pressed on toggles" },
+      { "label": "Screen reader support", "status": "warn", "notes": "Chart not fully accessible to screen readers" }
+    ]
+  },
+
+  "usability": {
+    "title": "Usability",
+    "checks": [
+      { "label": "Feature discoverability", "status": "pass", "notes": "Clear input labels and section headers" },
+      { "label": "Feedback on actions", "status": "warn", "notes": "Sliders update instantly, but no confirmation on value clamp" },
+      { "label": "Error prevention", "status": "pass", "notes": "Input clamping prevents invalid values" },
+      { "label": "Recovery options", "status": "warn", "notes": "No undo/reset to defaults button" },
+      { "label": "Cognitive load", "status": "pass", "notes": "Progressive sections, not overwhelming" },
+      { "label": "Loading states", "status": "warn", "notes": "No skeleton/loading state for chart" },
+      { "label": "Real-time updates", "status": "pass", "notes": "All calculations update immediately" },
+      { "label": "Currency handling", "status": "pass", "notes": "Proper locale-aware formatting" }
+    ]
+  },
+
+  "forms": {
+    "title": "Forms",
+    "checks": [
+      { "label": "Clear labels", "status": "pass", "notes": "Every input has visible label" },
+      { "label": "Input modes", "status": "warn", "notes": "Missing inputMode='numeric' for mobile keyboards" },
+      { "label": "Validation feedback", "status": "warn", "notes": "Silent clamping, no explicit error messages" },
+      { "label": "Field types", "status": "pass", "notes": "Appropriate slider + text input combo" },
+      { "label": "Min/max indicators", "status": "pass", "notes": "Slider labels show range" },
+      { "label": "Placeholder usage", "status": "na", "notes": "Sliders don't need placeholders" }
+    ]
+  },
+
+  "priority_fixes": [
+    {
+      "rank": 1,
+      "title": "Add chart accessibility",
+      "description": "Chart data not accessible to screen readers. Add aria-label or data table alternative.",
+      "framework_reference": "27-patterns-accessibility.md → Screen Reader Support",
+      "status": "FIXED",
+      "fix_date": "2026-02-01"
+    },
+    {
+      "rank": 2,
+      "title": "Add validation feedback",
+      "description": "When values are clamped, show brief toast or inline message explaining the adjustment.",
+      "framework_reference": "26-patterns-error-handling.md → Form Validation",
+      "status": "PENDING"
+    },
+    {
+      "rank": 3,
+      "title": "Add reset to defaults",
+      "description": "Allow users to quickly reset all inputs to default values for new calculations.",
+      "framework_reference": "26-patterns-error-handling.md → Undo/Redo",
+      "status": "FIXED",
+      "fix_date": "2026-02-01"
+    },
+    {
+      "rank": 4,
+      "title": "Add chart loading skeleton",
+      "description": "Show skeleton while chart renders to prevent layout shift perception.",
+      "framework_reference": "25-patterns-feedback.md → Progress Indicators",
+      "status": "PENDING"
+    },
+    {
+      "rank": 5,
+      "title": "Improve sublabel contrast",
+      "description": "Some metric sublabels (0.35 opacity) don't meet WCAG AA. Increase to 0.5+.",
+      "framework_reference": "27-patterns-accessibility.md → Color Contrast",
+      "status": "FIXED",
+      "fix_date": "2026-02-01"
+    }
+  ],
+
+  "scores": {
+    "visual_hierarchy": 100,
+    "visual_style": 100,
+    "accessibility": 75,
+    "usability": 71,
+    "forms": 67,
+    "overall": 83
+  },
+
+  "notes": "Strong visual design with excellent glassmorphism execution. Main gaps are in accessibility (chart) and feedback (validation). The CVR degradation model and implementation period visualization add credibility to projections. Recommend addressing priority fixes 1-3 before production launch."
+}
