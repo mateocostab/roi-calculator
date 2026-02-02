@@ -615,29 +615,44 @@ export function Calculator() {
               flexDirection: 'column',
               justifyContent: 'center',
             }}>
-              {/* Fire silhouette - organic curved flames */}
+              {/* Stylized flame silhouette - classic teardrop flame tongues */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
+                height: '100%',
+                opacity: 0.22,
+                pointerEvents: 'none',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='fg1' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23cc3300'/%3E%3Cstop offset='50%25' stop-color='%23ff6633'/%3E%3Cstop offset='100%25' stop-color='%23ff9944'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23fg1)' d='M0 100 L0 85 Q2 82 5 85 Q8 75 12 70 Q14 65 12 60 Q10 50 15 40 Q18 32 15 25 Q12 15 18 8 Q22 2 26 10 Q30 18 28 28 Q25 38 30 45 Q35 55 32 65 Q30 72 35 78 Q40 70 42 60 Q44 50 48 42 Q52 32 50 22 Q48 12 55 5 Q60 0 65 8 Q70 18 68 30 Q65 42 70 52 Q75 62 72 72 Q70 80 78 75 Q85 68 88 55 Q92 42 96 30 Q100 18 105 8 Q110 0 115 10 Q120 22 118 35 Q115 48 120 58 Q125 68 122 78 Q120 85 128 80 Q135 72 138 60 Q142 48 148 35 Q152 22 158 12 Q165 2 172 15 Q178 28 175 42 Q172 55 178 65 Q185 75 182 85 Q195 80 200 88 L200 100 Z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: 'repeat-x',
+                backgroundPosition: 'bottom center',
+                backgroundSize: 'auto 100%',
+              }} />
+
+              {/* Second layer - front flames */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: '10%',
+                right: '10%',
                 height: '70%',
                 opacity: 0.18,
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='fg' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='50%25' stop-color='%23ff8c00'/%3E%3Cstop offset='100%25' stop-color='%23ffd700'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23fg)' d='M0 120 C0 120 5 95 12 100 C20 105 22 70 30 75 C38 80 35 45 48 55 C55 62 52 30 65 42 C75 52 70 20 85 35 C95 48 88 15 105 30 C118 42 110 8 130 25 C145 40 138 5 158 22 C172 38 168 12 185 28 C198 42 195 18 212 32 C228 48 222 25 242 38 C258 52 255 30 272 42 C288 55 282 35 302 48 C318 60 315 42 332 55 C348 68 345 52 362 62 C378 72 375 58 392 68 C400 75 400 120 400 120 Z'/%3E%3Cpath fill='%23ff6b35' opacity='0.7' d='M0 120 C0 120 8 100 18 105 C28 110 30 85 42 90 C55 95 52 65 68 75 C82 85 78 55 95 68 C110 80 105 50 125 62 C142 75 138 48 158 60 C175 72 172 52 192 62 C210 72 205 55 228 65 C248 75 245 58 268 68 C288 78 285 62 308 72 C328 82 325 68 348 78 C368 88 365 75 388 85 C400 90 400 120 400 120 Z'/%3E%3Cpath fill='%23cc4400' opacity='0.5' d='M0 120 C0 120 15 105 30 108 C48 112 52 95 72 100 C92 105 95 90 118 95 C140 100 142 88 168 92 C192 96 195 85 222 90 C248 95 250 85 280 90 C308 95 312 88 342 92 C368 96 375 90 400 95 L400 120 Z'/%3E%3C/svg%3E")`,
-                backgroundRepeat: 'no-repeat',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 70' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff7733' d='M0 70 L0 60 Q5 55 10 50 Q12 45 10 38 Q8 30 12 22 Q15 15 12 8 Q10 2 18 5 Q25 10 22 20 Q20 30 25 38 Q30 48 28 55 Q35 50 40 40 Q45 30 50 20 Q55 10 62 5 Q70 0 75 10 Q80 22 78 35 Q75 48 82 55 Q90 48 95 38 Q100 28 108 18 Q115 8 122 15 Q130 25 128 38 Q125 50 132 58 Q140 52 145 60 L150 70 Z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: 'repeat-x',
                 backgroundPosition: 'bottom center',
-                backgroundSize: '100% auto',
+                backgroundSize: 'auto 100%',
               }} />
 
-              {/* Bottom glow */}
+              {/* Bottom glow gradient */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
                 height: '40%',
-                background: 'linear-gradient(to top, rgba(255, 100, 50, 0.25), transparent)',
+                background: 'linear-gradient(to top, rgba(255, 80, 30, 0.35), transparent)',
                 pointerEvents: 'none',
               }} />
 
