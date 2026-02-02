@@ -61,7 +61,7 @@ export const INPUT_RANGES: Record<string, InputRange> = {
     min: 1_000,
     max: 10_000_000,
     step: 1_000,
-    default: 50_000,
+    default: 100_000,
   },
   currentCVR: {
     min: 0.1,

@@ -90,7 +90,7 @@ describe('useCalculator hook', () => {
       const initialRevenue = result.current.currentState.revenue;
 
       act(() => {
-        result.current.setMonthlyVisitors(100000); // Double visitors
+        result.current.setMonthlyVisitors(200000); // Double visitors from 100K default
       });
 
       // Revenue should double

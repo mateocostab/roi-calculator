@@ -17,9 +17,9 @@ export const es = {
 
   // Scenarios
   'scenarios.title': 'Escenario de Mejora',
-  'scenarios.conservative': 'Gradual',
+  'scenarios.conservative': 'Conservador',
   'scenarios.conservativeDesc': '+15% CVR',
-  'scenarios.expected': 'Típico',
+  'scenarios.expected': 'Esperado',
   'scenarios.expectedDesc': '+25% CVR',
   'scenarios.optimistic': 'Acelerado',
   'scenarios.optimisticDesc': '+40% CVR',
@@ -69,8 +69,8 @@ export const es = {
   'roi.totalInvestment': 'Inversión Total',
   'roi.additionalRevenue': 'Ingresos Adicionales',
   'roi.roiMultiple': 'ROI',
-  'roi.payback': 'Recuperación',
-  'roi.paybackTooltip': 'Tiempo estimado para recuperar tu inversión total del período seleccionado',
+  'roi.payback': 'Recuperas {amount} en',
+  'roi.paybackTooltip': 'Mes en el que tus ingresos adicionales acumulados cubren tu inversión total',
   'roi.roiAt3Months': 'ROI a 3 meses',
   'roi.roiAt3MonthsTooltip': 'Retorno sobre la inversión de los primeros 3 meses. Garantizamos mínimo 2x.',
   'roi.guaranteeTitle': 'Garantía de Resultados',
@@ -86,6 +86,7 @@ export const es = {
   'chart.current': 'Actual',
   'chart.improved': 'Con CRO',
   'chart.scaled': 'Con Escala',
+  'chart.scaledNoCro': 'Escala sin CRO',
   'chart.month': 'Mes',
   'chart.revenue': 'Ingresos',
   'chart.cumulative': 'Acumulado',
@@ -120,33 +121,30 @@ export const es = {
 
   // Guarantees section
   'guarantees.title': 'No Una, Sino',
-  'guarantees.titleAccent': 'Ocho Garantías',
+  'guarantees.titleAccent': 'Siete Garantías',
   'guarantees.subtitle': 'Que Respaldamos',
   'guarantees.prefix': 'Garantizamos',
 
-  'guarantees.1.name': '"Duplica Tu Inversión"',
-  'guarantees.1.description': 'que en 90 días habrás recuperado el doble de lo que invertiste con nosotros, basado en el forecasting de los experimentos implementados. Si no lo logramos, te devolvemos tu dinero.',
+  'guarantees.1.name': '"Cero Fallos"',
+  'guarantees.1.description': 'que usaremos el mismo sistema que ha aumentado la conversión de cada tienda que hemos optimizado. No importa si antes la manejaba un equipo interno o una agencia. Los hemos superado a todos.',
 
-  'guarantees.2.name': '"Cero Fallos"',
-  'guarantees.2.description': 'que usaremos el mismo sistema que ha aumentado la conversión de cada tienda que hemos optimizado. No importa si antes la manejaba un equipo interno o una agencia. Los hemos superado a todos.',
+  'guarantees.2.name': '"Los Clientes No Se Van"',
+  'guarantees.2.description': 'que nuestro cliente promedio se queda más de un año. No amarramos a nadie con contratos largos. Los resultados hacen que sea difícil irse.',
 
-  'guarantees.3.name': '"Los Clientes No Se Van"',
-  'guarantees.3.description': 'que nuestro cliente promedio se queda más de un año. No amarramos a nadie con contratos largos. Los resultados hacen que sea difícil irse.',
+  'guarantees.3.name': '"Top 10% del Mercado"',
+  'guarantees.3.description': 'que después de 90 días, tu tienda superará al 90% de tus competidores en RPS (Revenue Per Session). Eso significa 3-9x más ventas por visitante que tu competencia.',
 
-  'guarantees.4.name': '"Top 10% del Mercado"',
-  'guarantees.4.description': 'que después de 90 días, tu tienda superará al 90% de tus competidores en RPS (Revenue Per Session). Eso significa 3-9x más ventas por visitante que tu competencia.',
+  'guarantees.4.name': '"Conversión Sin Descuentos"',
+  'guarantees.4.description': 'que no dependeremos de cupones, márgenes destruidos ni urgencia falsa. Optimizamos tu tienda para construir confianza e intención de compra. Tus márgenes quedan intactos.',
 
-  'guarantees.5.name': '"Conversión Sin Descuentos"',
-  'guarantees.5.description': 'que no dependeremos de cupones, márgenes destruidos ni urgencia falsa. Optimizamos tu tienda para construir confianza e intención de compra. Tus márgenes quedan intactos.',
+  'guarantees.5.name': '"Optimización Implacable"',
+  'guarantees.5.description': 'que mientras otros diseñan y olvidan, nosotros optimizamos semanalmente. Aprovechamos más de 200 A/B tests ganadores para forzar tu revenue hacia arriba.',
 
-  'guarantees.6.name': '"Optimización Implacable"',
-  'guarantees.6.description': 'que mientras otros diseñan y olvidan, nosotros optimizamos semanalmente. Aprovechamos más de 200 A/B tests ganadores para forzar tu revenue hacia arriba.',
+  'guarantees.6.name': '"Siempre Informado"',
+  'guarantees.6.description': 'que tendrás reportes de performance semanales y análisis mensuales. Siempre sabrás dónde estamos y cuáles son los próximos pasos.',
 
-  'guarantees.7.name': '"Siempre Informado"',
-  'guarantees.7.description': 'que tendrás reportes de performance semanales y análisis mensuales. Siempre sabrás dónde estamos y cuáles son los próximos pasos.',
-
-  'guarantees.8.name': '"Nunca Sobrecargados"',
-  'guarantees.8.description': 'que no somos una agencia inflada persiguiendo logos. Tomamos pocas marcas a la vez. Tu cuenta recibe atención senior, entrega rápida, y estrategia pensada.',
+  'guarantees.7.name': '"Nunca Sobrecargados"',
+  'guarantees.7.description': 'que no somos una agencia inflada persiguiendo logos. Tomamos pocas marcas a la vez. Tu cuenta recibe atención senior, entrega rápida, y estrategia pensada.',
 };
 
 export type TranslationKey = keyof typeof es;

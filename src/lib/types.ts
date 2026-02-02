@@ -45,9 +45,11 @@ export interface ProjectionDataPoint {
   current: number;
   improved: number;
   scaled: number;
+  scaledNoCro: number;
   currentCumulative: number;
   improvedCumulative: number;
   scaledCumulative: number;
+  scaledNoCroCumulative: number;
 }
 
 export interface ROIMetrics {
@@ -57,6 +59,7 @@ export interface ROIMetrics {
   roiPercent: number;
   paybackMonths: number;
   roiAt3Months: number; // ROI at 3 months, aligned with guarantee
+  firstProfitableMonth: number; // First month where monthly revenue >= monthly CRO
 }
 
 export interface CalculatorState {

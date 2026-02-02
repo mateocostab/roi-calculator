@@ -19,9 +19,9 @@ export const en: Record<TranslationKey, string> = {
 
   // Scenarios
   'scenarios.title': 'Improvement Scenario',
-  'scenarios.conservative': 'Gradual',
+  'scenarios.conservative': 'Conservative',
   'scenarios.conservativeDesc': '+15% CVR',
-  'scenarios.expected': 'Typical',
+  'scenarios.expected': 'Expected',
   'scenarios.expectedDesc': '+25% CVR',
   'scenarios.optimistic': 'Accelerated',
   'scenarios.optimisticDesc': '+40% CVR',
@@ -71,8 +71,8 @@ export const en: Record<TranslationKey, string> = {
   'roi.totalInvestment': 'Total Investment',
   'roi.additionalRevenue': 'Additional Revenue',
   'roi.roiMultiple': 'ROI',
-  'roi.payback': 'Payback',
-  'roi.paybackTooltip': 'Estimated time to recover your total investment for the selected period',
+  'roi.payback': 'Recover {amount} in',
+  'roi.paybackTooltip': 'Month when your cumulative additional revenue covers your total investment',
   'roi.roiAt3Months': 'ROI at 3 months',
   'roi.roiAt3MonthsTooltip': 'Return on the first 3 months of investment. We guarantee at least 2x.',
   'roi.guaranteeTitle': 'Results Guarantee',
@@ -88,6 +88,7 @@ export const en: Record<TranslationKey, string> = {
   'chart.current': 'Current',
   'chart.improved': 'With CRO',
   'chart.scaled': 'With Scaling',
+  'chart.scaledNoCro': 'Scale without CRO',
   'chart.month': 'Month',
   'chart.revenue': 'Revenue',
   'chart.cumulative': 'Cumulative',
@@ -122,31 +123,28 @@ export const en: Record<TranslationKey, string> = {
 
   // Guarantees section
   'guarantees.title': 'Not One, But',
-  'guarantees.titleAccent': 'Eight Guarantees',
+  'guarantees.titleAccent': 'Seven Guarantees',
   'guarantees.subtitle': 'We Stand Behind',
   'guarantees.prefix': 'We guarantee',
 
-  'guarantees.1.name': '"Double Your Investment"',
-  'guarantees.1.description': 'in 90 days you\'ll recover double what you invested with us, based on experiment forecasting. If we don\'t hit it, we refund your money.',
+  'guarantees.1.name': '"Zero Failures"',
+  'guarantees.1.description': 'we\'ll use the same system that has increased conversion for every store we\'ve optimized. Doesn\'t matter if it was managed by an internal team or another agency. We\'ve outperformed them all.',
 
-  'guarantees.2.name': '"Zero Failures"',
-  'guarantees.2.description': 'we\'ll use the same system that has increased conversion for every store we\'ve optimized. Doesn\'t matter if it was managed by an internal team or another agency. We\'ve outperformed them all.',
+  'guarantees.2.name': '"Clients Don\'t Leave"',
+  'guarantees.2.description': 'our average client stays over a year. We don\'t lock anyone in with long contracts. The results make it hard to leave.',
 
-  'guarantees.3.name': '"Clients Don\'t Leave"',
-  'guarantees.3.description': 'our average client stays over a year. We don\'t lock anyone in with long contracts. The results make it hard to leave.',
+  'guarantees.3.name': '"Top 10% of the Market"',
+  'guarantees.3.description': 'after 90 days, your store will outperform 90% of competitors in RPS (Revenue Per Session). That means 3-9x more sales per visitor than your competition.',
 
-  'guarantees.4.name': '"Top 10% of the Market"',
-  'guarantees.4.description': 'after 90 days, your store will outperform 90% of competitors in RPS (Revenue Per Session). That means 3-9x more sales per visitor than your competition.',
+  'guarantees.4.name': '"Conversion Without Discounts"',
+  'guarantees.4.description': 'we won\'t rely on coupons, destroyed margins, or fake urgency. We optimize your store to build trust and purchase intent. Your margins stay intact.',
 
-  'guarantees.5.name': '"Conversion Without Discounts"',
-  'guarantees.5.description': 'we won\'t rely on coupons, destroyed margins, or fake urgency. We optimize your store to build trust and purchase intent. Your margins stay intact.',
+  'guarantees.5.name': '"Relentless Optimization"',
+  'guarantees.5.description': 'while others design and forget, we optimize weekly. We leverage 200+ winning A/B tests to force your revenue upward.',
 
-  'guarantees.6.name': '"Relentless Optimization"',
-  'guarantees.6.description': 'while others design and forget, we optimize weekly. We leverage 200+ winning A/B tests to force your revenue upward.',
+  'guarantees.6.name': '"Always Informed"',
+  'guarantees.6.description': 'you\'ll get weekly performance reports and monthly analyses. You\'ll always know where we are and what\'s next.',
 
-  'guarantees.7.name': '"Always Informed"',
-  'guarantees.7.description': 'you\'ll get weekly performance reports and monthly analyses. You\'ll always know where we are and what\'s next.',
-
-  'guarantees.8.name': '"Never Overstretched"',
-  'guarantees.8.description': 'we\'re not a bloated agency chasing logos. We take few brands at a time. Your account gets senior attention, fast delivery, and real strategy.',
+  'guarantees.7.name': '"Never Overstretched"',
+  'guarantees.7.description': 'we\'re not a bloated agency chasing logos. We take few brands at a time. Your account gets senior attention, fast delivery, and real strategy.',
 };

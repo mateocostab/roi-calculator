@@ -43,6 +43,14 @@ const parseFormattedNumber = (value: string) => {
   return isNaN(parsed) ? 0 : parsed;
 };
 
+// Tooltip component with hover
+const InfoTooltip = ({ text, green }: { text: string; green?: boolean }) => (
+  <span className="tooltip-wrapper">
+    <span className={`tooltip-icon ${green ? 'tooltip-icon-green' : ''}`} tabIndex={0}>?</span>
+    <span className="tooltip-content">{text}</span>
+  </span>
+);
+
 export function Calculator() {
   const { t, language, setLanguage, currency, setCurrency, currencyConfig, formatCurrency, formatNumber, convertFromUSD } = useTranslation();
   const calc = useCalculator();
@@ -72,6 +80,22 @@ export function Calculator() {
     adSpendValueRef.current = calc.inputs.adSpend;
     croInvestmentValueRef.current = calc.inputs.croInvestment;
   }, [calc.inputs.aov, calc.inputs.adSpend, calc.inputs.croInvestment]);
+
+  // Initialize monetary inputs with converted defaults on mount
+  const hasInitializedRef = useRef(false);
+  useEffect(() => {
+    if (!hasInitializedRef.current) {
+      hasInitializedRef.current = true;
+      // Always set converted defaults on initial mount
+      const newAov = convertFromUSD(INPUT_RANGES.aov.default);
+      const newAdSpend = convertFromUSD(INPUT_RANGES.adSpend.default);
+      const newCroInvestment = convertFromUSD(INPUT_RANGES.croInvestment.default);
+
+      calc.setAov(newAov);
+      calc.setAdSpend(newAdSpend);
+      calc.setCroInvestment(newCroInvestment);
+    }
+  }, [convertFromUSD, calc.setAov, calc.setAdSpend, calc.setCroInvestment]);
 
   // Reset monetary inputs to defaults when currency changes
   useEffect(() => {
@@ -218,12 +242,13 @@ export function Calculator() {
       [t('chart.current')]: point.current,
       [t('chart.improved')]: point.improved,
       [t('chart.scaled')]: point.scaled,
+      [t('chart.scaledNoCro')]: point.scaledNoCro,
     }));
   }, [calc.projectionData, t]);
 
   return (
     <div className="app-container">
-      <div style={{ position: 'relative', zIndex: 1, padding: '48px 20px', maxWidth: 1140, margin: '0 auto' }}>
+      <div className="main-content">
 
         {/* ═══════════════ HEADER ═══════════════ */}
         <header className="animate-in" style={{ textAlign: 'center', marginBottom: 56 }}>
@@ -265,7 +290,7 @@ export function Calculator() {
           </p>
 
           {/* Language & Currency Toggle */}
-          <div style={{ marginTop: 32, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 20, flexWrap: 'wrap' }}>
+          <div className="header-toggles" style={{ marginTop: 32 }}>
             <div className="lang-toggle" style={{ display: 'inline-flex' }}>
               <button
                 className={`lang-btn ${language === 'es' ? 'lang-btn-active' : ''}`}
@@ -326,7 +351,7 @@ export function Calculator() {
             </button>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 28 }}>
+          <div className="inputs-grid">
             {/* Visitors */}
             <div className="input-group">
               <label className="input-label">{t('inputs.visitors')}</label>
@@ -458,7 +483,7 @@ export function Calculator() {
             {t('scenarios.dataSource')}
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+          <div className="scenario-grid">
             {SCENARIOS.map((scenario) => {
               const isActive = calc.inputs.scenario === scenario.id;
               const improvementPercent = Math.round((scenario.multiplier - 1) * 100);
@@ -467,6 +492,7 @@ export function Calculator() {
               return (
                 <button
                   key={scenario.id}
+                  className="scenario-card"
                   onClick={() => calc.setScenario(scenario.id)}
                   style={{
                     position: 'relative',
@@ -530,7 +556,7 @@ export function Calculator() {
                   </p>
 
                   {/* Big improvement number */}
-                  <p style={{
+                  <p className="scenario-card-number" style={{
                     margin: 0,
                     fontSize: 44,
                     fontWeight: 700,
@@ -591,12 +617,7 @@ export function Calculator() {
           </div>
 
           {/* Loss Aversion + Monthly Impact Grid */}
-          <div style={{
-            marginTop: 20,
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 16,
-          }}>
+          <div className="loss-impact-grid" style={{ marginTop: 20 }}>
             {/* Fire-themed loss aversion banner */}
             <div style={{
               position: 'relative',
@@ -663,11 +684,11 @@ export function Calculator() {
                 }}>
                   {t('loss.title')}
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+                <div className="fire-numbers">
                   <div>
                     <p style={{
                       margin: 0,
-                      fontSize: 'clamp(24px, 3vw, 32px)',
+                      fontSize: 'clamp(22px, 3vw, 32px)',
                       fontWeight: 700,
                       background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
                       WebkitBackgroundClip: 'text',
@@ -682,11 +703,11 @@ export function Calculator() {
                       {t('loss.monthly')}
                     </p>
                   </div>
-                  <div style={{ width: 1, height: 40, background: 'linear-gradient(180deg, transparent, rgba(255, 120, 60, 0.5), transparent)' }} />
+                  <div className="divider" style={{ width: 1, height: 40, background: 'linear-gradient(180deg, transparent, rgba(255, 120, 60, 0.5), transparent)' }} />
                   <div>
                     <p style={{
                       margin: 0,
-                      fontSize: 'clamp(24px, 3vw, 32px)',
+                      fontSize: 'clamp(22px, 3vw, 32px)',
                       fontWeight: 700,
                       background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
                       WebkitBackgroundClip: 'text',
@@ -722,7 +743,7 @@ export function Calculator() {
                 <p style={{ margin: 0, fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 700, color: '#00ff84', fontFamily: "'Space Mono', monospace" }}>
                   +{formatCurrency(calc.improvedState.revenue - calc.currentState.revenue)}
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 12 }}>
+                <div className="impact-stats" style={{ marginTop: 12 }}>
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
                       {t('scenarios.extraOrders')}
@@ -731,7 +752,7 @@ export function Calculator() {
                       +{formatNumber(Math.round(calc.improvedState.orders - calc.currentState.orders))}
                     </p>
                   </div>
-                  <div style={{ width: 1, height: 28, background: 'rgba(255, 255, 255, 0.1)' }} />
+                  <div className="stat-divider" style={{ width: 1, height: 28, background: 'rgba(255, 255, 255, 0.1)' }} />
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
                       {t('scenarios.newRoas')}
@@ -763,27 +784,12 @@ export function Calculator() {
             <h2 className="section-title">{t('efficiency.title')}</h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          <div className="efficiency-grid">
             {/* RPS - Primary Metric */}
             <div className="glass-card-highlight" style={{ padding: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <p className="metric-label metric-label-green" style={{ margin: 0 }}>{t('efficiency.rps')}</p>
-                <span
-                  title={t('efficiency.rpsTooltip')}
-                  style={{
-                    cursor: 'help',
-                    width: 16,
-                    height: 16,
-                    borderRadius: '50%',
-                    background: 'rgba(0, 255, 132, 0.2)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    color: '#00ff84',
-                    fontWeight: 600,
-                  }}
-                >?</span>
+                <InfoTooltip text={t('efficiency.rpsTooltip')} green />
                 <span style={{
                   fontSize: 9,
                   fontWeight: 600,
@@ -823,22 +829,7 @@ export function Calculator() {
             <div className="glass-card" style={{ padding: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                 <p className="metric-label" style={{ margin: 0 }}>{t('efficiency.roas')}</p>
-                <span
-                  title={t('efficiency.roasTooltip')}
-                  style={{
-                    cursor: 'help',
-                    width: 16,
-                    height: 16,
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    color: 'rgba(255, 255, 255, 0.5)',
-                    fontWeight: 600,
-                  }}
-                >?</span>
+                <InfoTooltip text={t('efficiency.roasTooltip')} />
               </div>
               <p className="metric-sublabel">{t('efficiency.roasDesc')}</p>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
@@ -865,22 +856,7 @@ export function Calculator() {
             <div className="glass-card" style={{ padding: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                 <p className="metric-label" style={{ margin: 0 }}>{t('efficiency.cpa')}</p>
-                <span
-                  title={t('efficiency.cpaTooltip')}
-                  style={{
-                    cursor: 'help',
-                    width: 16,
-                    height: 16,
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    color: 'rgba(255, 255, 255, 0.5)',
-                    fontWeight: 600,
-                  }}
-                >?</span>
+                <InfoTooltip text={t('efficiency.cpaTooltip')} />
               </div>
               <p className="metric-sublabel">{t('efficiency.cpaDesc')}</p>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
@@ -912,7 +888,7 @@ export function Calculator() {
             <h2 className="section-title">{t('revenue.title')}</h2>
           </div>
 
-          <div className="revenue-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+          <div className="revenue-cards-grid">
             {/* Current */}
             <div className="glass-card-static" style={{ padding: '20px 16px', overflow: 'hidden' }}>
               <p className="metric-label">{t('revenue.current')}</p>
@@ -955,10 +931,7 @@ export function Calculator() {
           </div>
 
           {/* Scaling controls - compact row above chart */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: 24,
+          <div className="scaling-controls" style={{
             marginBottom: 24,
             padding: '20px 24px',
             background: 'rgba(139, 92, 246, 0.08)',
@@ -1016,7 +989,7 @@ export function Calculator() {
             </div>
           </div>
 
-          <div style={{ height: 360, position: 'relative', overflow: 'hidden' }}>
+          <div className="chart-container">
             {/* Shaded zone - BEHIND the chart */}
             {calc.inputs.projectionMonths >= 3 && (
               <div
@@ -1046,6 +1019,10 @@ export function Calculator() {
                   <linearGradient id="gradScaled" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3} />
                     <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
+                  </linearGradient>
+                  <linearGradient id="gradScaledNoCro" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.2} />
+                    <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <XAxis
@@ -1084,6 +1061,14 @@ export function Calculator() {
                 />
                 <Area
                   type="monotone"
+                  dataKey={t('chart.scaledNoCro')}
+                  stroke="#f59e0b"
+                  strokeWidth={2}
+                  strokeDasharray="4 4"
+                  fill="url(#gradScaledNoCro)"
+                />
+                <Area
+                  type="monotone"
                   dataKey={t('chart.improved')}
                   stroke="#00ff84"
                   strokeWidth={2}
@@ -1110,45 +1095,24 @@ export function Calculator() {
                     top: '10px',
                     width: '0',
                     height: 'calc(100% - 56px)',
-                    borderLeft: '2px dashed rgba(255, 255, 255, 0.3)',
+                    borderLeft: '2px dashed rgba(255, 255, 255, 0.2)',
                     pointerEvents: 'none',
                   }}
                 />
-                {/* Guarantee badge */}
-                <span
-                  style={{
-                    position: 'absolute',
-                    left: `calc(80px + (100% - 90px) * ${3 / calc.inputs.projectionMonths})`,
-                    top: '16px',
-                    transform: 'translateX(-50%)',
-                    background: 'rgba(0, 255, 132, 0.15)',
-                    borderRadius: 10,
-                    padding: '4px 8px 3px',
-                    pointerEvents: 'none',
-                    fontSize: 9,
-                    fontWeight: 600,
-                    color: '#00ff84',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.02em',
-                    whiteSpace: 'nowrap',
-                    lineHeight: 1,
-                  }}
-                >
-                  {t('chart.guaranteeZone')}
-                </span>
                 {/* Implementation label */}
                 <span
+                  className="chart-overlay-label"
                   style={{
                     position: 'absolute',
                     left: `calc(80px + (100% - 90px) * ${1.5 / calc.inputs.projectionMonths})`,
-                    top: '45px',
+                    top: '20px',
                     transform: 'translateX(-50%)',
                     pointerEvents: 'none',
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 600,
                     color: 'rgba(0, 255, 132, 0.35)',
                     textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
+                    letterSpacing: '0.08em',
                     whiteSpace: 'nowrap',
                   }}
                 >
@@ -1166,110 +1130,58 @@ export function Calculator() {
             <h2 className="section-title">{t('roi.title')}</h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 24, alignItems: 'end' }}>
-            {/* Investment Input */}
-            <div className="input-group">
-              <label className="input-label">{t('roi.investment')}</label>
-              <div style={{ position: 'relative' }}>
-                <span className="input-prefix">{currencyConfig.symbol}</span>
-                <input
-                  ref={croInvestmentRef}
-                  type="text"
-                  className="input-field input-field-with-prefix"
-                  defaultValue={formatNumber(calc.inputs.croInvestment)}
-                  onFocus={handleFocus('croInvestment')}
-                  onBlur={handleCroInvestmentBlur}
-                />
+          {/* Main ROI Layout: Left side input + metrics, Right side big ROI */}
+          <div className="roi-main-layout">
+            {/* Left column: Input + Stats */}
+            <div className="roi-left-column">
+              {/* Investment Input */}
+              <div className="input-group" style={{ marginBottom: 16 }}>
+                <label className="input-label">{t('roi.investment')}</label>
+                <div style={{ position: 'relative' }}>
+                  <span className="input-prefix">{currencyConfig.symbol}</span>
+                  <input
+                    ref={croInvestmentRef}
+                    type="text"
+                    className="input-field input-field-with-prefix"
+                    defaultValue={formatNumber(calc.inputs.croInvestment)}
+                    onFocus={handleFocus('croInvestment')}
+                    onBlur={handleCroInvestmentBlur}
+                  />
+                </div>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginTop: 8 }}>
+                  {t('roi.totalInvestment')}: {formatCurrency(calc.roiMetrics.totalInvestment)}
+                </p>
               </div>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginTop: 8 }}>
-                {t('roi.totalInvestment')}: {formatCurrency(calc.roiMetrics.totalInvestment)}
-              </p>
-            </div>
 
-            {/* Stats */}
-            <div className="glass-card-static" style={{ padding: 20 }}>
-              <p className="metric-label">{t('roi.additionalRevenue')}</p>
-              <p className="metric-value metric-value-green" style={{ marginTop: 8 }}>
-                {calc.roiMetrics.roiMultiple > MAX_REALISTIC_ROI ? '—' : formatCurrency(calc.roiMetrics.totalAdditionalRevenue)}
-              </p>
-            </div>
+              {/* Stats Row - 2 equal boxes */}
+              <div className="roi-stats-row-2">
+                {/* Additional Revenue */}
+                <div className="glass-card-static roi-stat-box">
+                  <p className="metric-label">{t('roi.additionalRevenue')}</p>
+                  <p className="roi-stat-value metric-value-green">
+                    {calc.roiMetrics.roiMultiple > MAX_REALISTIC_ROI ? '—' : formatCurrency(calc.roiMetrics.totalAdditionalRevenue, true)}
+                  </p>
+                </div>
 
-            {/* Payback */}
-            <div className="glass-card-static" style={{ padding: 20 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <p className="metric-label" style={{ margin: 0 }}>{t('roi.payback')}</p>
-                <span
-                  title={t('roi.paybackTooltip')}
-                  style={{
-                    cursor: 'help',
-                    width: 16,
-                    height: 16,
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    color: 'rgba(255, 255, 255, 0.5)',
-                    fontWeight: 600,
-                  }}
-                >?</span>
+                {/* Payback */}
+                <div className="glass-card-static roi-stat-box">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <p className="metric-label" style={{ margin: 0 }}>
+                      {t('roi.payback').replace('{amount}', formatCurrency(calc.roiMetrics.totalInvestment))}
+                    </p>
+                    <InfoTooltip text={t('roi.paybackTooltip')} />
+                  </div>
+                  <p className="roi-stat-value metric-value-green">
+                    {calc.roiMetrics.paybackMonths === Infinity
+                      ? '—'
+                      : `${t('chart.month')} ${Math.ceil(calc.roiMetrics.paybackMonths)}`
+                    }
+                  </p>
+                </div>
               </div>
-              <p className="metric-value" style={{ marginTop: 8 }}>
-                {calc.roiMetrics.paybackMonths === Infinity
-                  ? '∞'
-                  : calc.roiMetrics.paybackMonths < 1
-                    ? t('format.lessThanOneMonth')
-                    : `${Math.ceil(calc.roiMetrics.paybackMonths)} ${calc.roiMetrics.paybackMonths <= 1 ? t('format.month') : t('format.months')}`
-                }
-              </p>
             </div>
 
-            {/* ROI at 3 months - aligned with guarantee */}
-            <div style={{
-              padding: 20,
-              borderRadius: 12,
-              background: 'linear-gradient(135deg, rgba(0, 255, 132, 0.12) 0%, rgba(0, 255, 132, 0.04) 100%)',
-              border: '1px solid rgba(0, 255, 132, 0.3)',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <p className="metric-label" style={{ margin: 0, color: 'rgba(0, 255, 132, 0.8)' }}>{t('roi.roiAt3Months')}</p>
-                <span
-                  title={t('roi.roiAt3MonthsTooltip')}
-                  style={{
-                    cursor: 'help',
-                    width: 16,
-                    height: 16,
-                    borderRadius: '50%',
-                    background: 'rgba(0, 255, 132, 0.2)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    color: 'rgba(0, 255, 132, 0.7)',
-                    fontWeight: 600,
-                  }}
-                >?</span>
-              </div>
-              <p style={{
-                margin: '8px 0 0 0',
-                fontSize: 28,
-                fontWeight: 700,
-                color: '#00ff84',
-                fontFamily: "'Space Mono', monospace",
-              }}>
-                {calc.roiMetrics.roiMultiple > MAX_REALISTIC_ROI ? '—' : `${calc.roiMetrics.roiAt3Months.toFixed(1)}x`}
-              </p>
-              <p style={{
-                margin: '4px 0 0 0',
-                fontSize: 11,
-                color: 'rgba(0, 255, 132, 0.6)',
-              }}>
-                {calc.roiMetrics.roiAt3Months >= 2 ? '✓ ' : ''}{t('roi.guaranteeTitle')}: 2x
-              </p>
-            </div>
-
-            {/* ROI Box */}
+            {/* Right column: Big ROI Box */}
             <div className="roi-box">
               <p className="roi-label">ROI ({calc.inputs.projectionMonths} {t('format.months')})</p>
               <p className="roi-value">{formatROI(calc.roiMetrics.roiMultiple)}</p>
@@ -1277,53 +1189,6 @@ export function Calculator() {
             </div>
           </div>
 
-          {/* Guarantee Badge */}
-          <div style={{
-            marginTop: 24,
-            padding: '16px 24px',
-            background: 'linear-gradient(135deg, rgba(0, 255, 132, 0.08) 0%, rgba(0, 255, 132, 0.02) 100%)',
-            border: '1px solid rgba(0, 255, 132, 0.25)',
-            borderRadius: 12,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 16,
-            flexWrap: 'wrap',
-          }}>
-            <div style={{
-              width: 48,
-              height: 48,
-              background: 'rgba(0, 255, 132, 0.15)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff84" strokeWidth="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <polyline points="9 12 11 14 15 10" />
-              </svg>
-            </div>
-            <div style={{ flex: 1, minWidth: 200 }}>
-              <p style={{
-                margin: 0,
-                fontSize: 15,
-                fontWeight: 600,
-                color: '#00ff84',
-                marginBottom: 4,
-              }}>
-                {t('roi.guaranteeTitle')}
-              </p>
-              <p style={{
-                margin: 0,
-                fontSize: 13,
-                color: 'rgba(255, 255, 255, 0.6)',
-                lineHeight: 1.5,
-              }}>
-                {t('roi.guaranteeText')}
-              </p>
-            </div>
-          </div>
         </section>
 
         {/* ═══════════════ GUARANTEES SECTION ═══════════════ */}
@@ -1342,14 +1207,10 @@ export function Calculator() {
           </h2>
 
           {/* Guarantees grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(280px, 1fr) 2fr',
-            gap: 32,
-          }}>
+          <div className="guarantees-grid">
             {/* Left: Guarantee list */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => {
+            <div className="guarantees-list" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {[1, 2, 3, 4, 5, 6, 7].map((num) => {
                 const isSelected = selectedGuarantee === num;
                 return (
                   <button
@@ -1415,7 +1276,7 @@ export function Calculator() {
         </section>
 
         {/* ═══════════════ QUALIFICATION BADGE ═══════════════ */}
-        <section className={`animate-in delay-4 ${qualifiesForCRO ? 'glass-card-highlight' : 'glass-card'}`} style={{ padding: 40, textAlign: 'center', marginBottom: 40 }}>
+        <section className={`animate-in delay-4 qualification-section ${qualifiesForCRO ? 'glass-card-highlight' : 'glass-card'}`} style={{ padding: 40, textAlign: 'center', marginBottom: 40 }}>
           {qualifiesForCRO ? (
             <>
               <div className="badge badge-green" style={{ marginBottom: 20 }}>

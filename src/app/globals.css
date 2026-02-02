@@ -376,6 +376,512 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
+/* Loss/Impact 2-column grid */
+.loss-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .loss-impact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Efficiency metrics 3-column grid */
+.efficiency-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .efficiency-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .efficiency-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ROI section layout */
+.roi-main-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.roi-left-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.roi-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  flex: 1;
+}
+
+.roi-stats-row-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  flex: 1;
+}
+
+.roi-stat-box {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.roi-stat-box-highlight {
+  background: linear-gradient(135deg, rgba(0, 255, 132, 0.12) 0%, rgba(0, 255, 132, 0.04) 100%);
+  border: 1px solid rgba(0, 255, 132, 0.3);
+  border-radius: 12px;
+}
+
+.roi-stat-value {
+  font-family: var(--font-mono);
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 700;
+  margin-top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Custom tooltips */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.tooltip-icon {
+  cursor: help;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.tooltip-icon-green {
+  background: rgba(0, 255, 132, 0.2);
+  color: rgba(0, 255, 132, 0.7);
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 18, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  width: max-content;
+  max-width: 280px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(10, 10, 18, 0.98);
+}
+
+.tooltip-wrapper:hover .tooltip-content,
+.tooltip-wrapper:focus-within .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile: make tooltip tappable */
+@media (max-width: 768px) {
+  .tooltip-content {
+    max-width: 240px;
+  }
+}
+
+/* ROI box adjustments */
+.roi-box {
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .roi-main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .roi-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .roi-box {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .roi-stats-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .roi-stats-row-2 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .roi-stat-value {
+    font-size: 20px;
+  }
+}
+
+/* Chart section grid */
+.chart-section-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .chart-section-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fire card numbers - stack on mobile */
+.fire-numbers {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 500px) {
+  .fire-numbers {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .fire-numbers .divider {
+    display: none;
+  }
+}
+
+/* Scenario cards */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .scenario-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Guarantees section grid */
+.guarantees-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .guarantees-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Main content container */
+.main-content {
+  position: relative;
+  z-index: 1;
+  padding: 48px 20px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: 32px 16px;
+  }
+}
+
+/* Scaling controls grid */
+.scaling-controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .scaling-controls {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* Inputs grid */
+.inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 500px) {
+  .inputs-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Revenue cards grid - 4 columns desktop, responsive */
+.revenue-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .revenue-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .revenue-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Chart guarantee overlays - hide on small screens */
+.chart-overlay-label {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .chart-overlay-label {
+    display: none;
+  }
+}
+
+/* Glass card padding on mobile */
+@media (max-width: 500px) {
+  .glass-card,
+  .glass-card-highlight,
+  .glass-card-scaling {
+    padding: 20px !important;
+  }
+
+  .glass-card-static {
+    padding: 16px !important;
+  }
+}
+
+/* Section header margin on mobile */
+@media (max-width: 500px) {
+  .section-header {
+    margin-bottom: 16px;
+  }
+}
+
+/* Guarantee buttons - horizontal scroll on mobile */
+@media (max-width: 900px) {
+  .guarantees-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .guarantees-list button {
+    flex: 0 0 auto;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    border-left: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* Header toggles - stack on very small screens */
+.header-toggles {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 400px) {
+  .header-toggles {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* Impact stats within fire/green cards */
+.impact-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 500px) {
+  .impact-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .impact-stats .stat-divider {
+    display: none;
+  }
+}
+
+/* Chart container - responsive height */
+.chart-container {
+  height: 360px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .chart-container {
+    height: 280px;
+  }
+}
+
+/* Qualification badge section padding */
+@media (max-width: 500px) {
+  .qualification-section {
+    padding: 28px 20px !important;
+  }
+}
+
+/* ROI guarantee badge - stack on mobile */
+.roi-guarantee-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 500px) {
+  .roi-guarantee-badge {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .roi-guarantee-badge > div:first-child {
+    margin: 0 auto;
+  }
+}
+
+/* Scenario card improvements for mobile */
+@media (max-width: 900px) {
+  .scenario-card {
+    padding: 20px !important;
+  }
+
+  .scenario-card-number {
+    font-size: 36px !important;
+  }
+}
+
+/* Loss/impact card text responsiveness */
+.loss-value-text {
+  font-size: clamp(20px, 4vw, 32px);
+}
+
+/* Metric flex wrap */
+.metric-comparison {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Footer text sizing */
+@media (max-width: 500px) {
+  .disclaimer {
+    font-size: 11px;
+    padding: 0 8px;
+  }
+}
+
+/* ROI section - adjust metrics display */
+@media (max-width: 600px) {
+  .roi-metrics-grid {
+    gap: 12px;
+  }
+}
+
+/* Efficiency cards inner content wrap */
+@media (max-width: 500px) {
+  .metric-value {
+    font-size: clamp(20px, 5vw, 28px);
+  }
+
+  .metric-value-lg {
+    font-size: clamp(26px, 6vw, 36px);
+  }
+}
+
+/* Fire card content padding */
+@media (max-width: 500px) {
+  .fire-card-content {
+    padding: 20px !important;
+  }
+}
+
+/* Scenario title text on mobile */
+@media (max-width: 900px) {
+  .scenario-section-title {
+    font-size: 13px;
+  }
+}
+
 .metric-value-lg {
   font-size: 36px;
 }
@@ -732,7 +1238,7 @@ input[type="range"]::-moz-range-thumb {
 
 .roi-value {
   font-family: var(--font-mono);
-  font-size: 52px;
+  font-size: clamp(36px, 8vw, 52px);
   font-weight: 700;
   color: #050508;
   line-height: 1;

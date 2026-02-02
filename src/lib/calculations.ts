@@ -155,9 +155,11 @@ export function generateProjectionData(
   const data: ProjectionDataPoint[] = [];
 
   let currentAdSpend = adSpend;
+  let currentAdSpendNoCro = adSpend; // Separate tracking for no-CRO scaling
   let currentCumulative = 0;
   let improvedCumulative = 0;
   let scaledCumulative = 0;
+  let scaledNoCroCumulative = 0;
 
   for (let month = 1; month <= months; month++) {
     // Get implementation factor for gradual ramp-up
@@ -181,7 +183,6 @@ export function generateProjectionData(
     improvedCumulative += improvedMonthlyRevenue;
 
     // Scaled state (CRO with gradual ramp-up + reinvestment)
-    // Note: Does NOT include ongoing 2% improvement to avoid double-compounding
     // Use square root scaling to model diminishing returns on ad spend
     const adSpendRatio = adSpend > 0 ? currentAdSpend / adSpend : 1;
     const scaledVisitorRatio = Math.sqrt(adSpendRatio); // Diminishing returns
@@ -194,20 +195,37 @@ export function generateProjectionData(
     const scaledRevenue = scaledVisitors * (scaledCVR / 100) * aov;
     scaledCumulative += scaledRevenue;
 
+    // Scaled state WITHOUT CRO (same reinvestment logic, but no CVR improvement)
+    const adSpendRatioNoCro = adSpend > 0 ? currentAdSpendNoCro / adSpend : 1;
+    const scaledVisitorRatioNoCro = Math.sqrt(adSpendRatioNoCro);
+    const scaledVisitorsNoCro = monthlyVisitors * scaledVisitorRatioNoCro;
+    const cvrDegradationNoCro = Math.pow(scaledVisitorRatioNoCro, -CVR_DEGRADATION_FACTOR);
+    const scaledCVRNoCro = currentCVR * cvrDegradationNoCro; // Original CVR, no improvement
+
+    const scaledNoCroRevenue = scaledVisitorsNoCro * (scaledCVRNoCro / 100) * aov;
+    scaledNoCroCumulative += scaledNoCroRevenue;
+
     data.push({
       month,
       current: currentMonthlyRevenue,
       improved: improvedMonthlyRevenue,
       scaled: scaledRevenue,
+      scaledNoCro: scaledNoCroRevenue,
       currentCumulative,
       improvedCumulative,
       scaledCumulative,
+      scaledNoCroCumulative,
     });
 
-    // Calculate reinvestment for next month
+    // Calculate reinvestment for next month (with CRO)
     const additionalRevenue = scaledRevenue - currentMonthlyRevenue;
     const reinvestment = additionalRevenue * (reinvestmentPercent / 100);
     currentAdSpend += reinvestment;
+
+    // Calculate reinvestment for no-CRO path
+    const additionalRevenueNoCro = scaledNoCroRevenue - currentMonthlyRevenue;
+    const reinvestmentNoCro = additionalRevenueNoCro * (reinvestmentPercent / 100);
+    currentAdSpendNoCro += reinvestmentNoCro;
   }
 
   return data;
@@ -256,6 +274,16 @@ export function calculateROI(
   const investmentAt3m = croInvestment * monthsFor3mROI;
   const roiAt3Months = investmentAt3m > 0 ? cumulativeAdditionalAt3m / investmentAt3m : 0;
 
+  // First profitable month - when monthly additional revenue >= monthly CRO investment
+  let firstProfitableMonth = 0;
+  for (let i = 0; i < projectionData.length; i++) {
+    const monthAdditional = projectionData[i].improved - projectionData[i].current;
+    if (monthAdditional >= croInvestment) {
+      firstProfitableMonth = i + 1; // 1-indexed
+      break;
+    }
+  }
+
   return {
     totalInvestment,
     totalAdditionalRevenue,
@@ -263,6 +291,7 @@ export function calculateROI(
     roiPercent,
     paybackMonths,
     roiAt3Months,
+    firstProfitableMonth,
   };
 }
 
