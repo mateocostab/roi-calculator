@@ -615,45 +615,57 @@ export function Calculator() {
               flexDirection: 'column',
               justifyContent: 'center',
             }}>
-              {/* Stylized flame silhouette - classic teardrop flame tongues */}
+              {/* Clean fire effect - gradient glow without drawn flames */}
+              {/* Radial warm glow spots */}
               <div style={{
                 position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '100%',
-                opacity: 0.22,
+                bottom: '-20%',
+                left: '-10%',
+                width: '40%',
+                height: '80%',
+                background: 'radial-gradient(ellipse at center, rgba(255, 100, 50, 0.4) 0%, transparent 70%)',
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='fg1' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23cc3300'/%3E%3Cstop offset='50%25' stop-color='%23ff6633'/%3E%3Cstop offset='100%25' stop-color='%23ff9944'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23fg1)' d='M0 100 L0 85 Q2 82 5 85 Q8 75 12 70 Q14 65 12 60 Q10 50 15 40 Q18 32 15 25 Q12 15 18 8 Q22 2 26 10 Q30 18 28 28 Q25 38 30 45 Q35 55 32 65 Q30 72 35 78 Q40 70 42 60 Q44 50 48 42 Q52 32 50 22 Q48 12 55 5 Q60 0 65 8 Q70 18 68 30 Q65 42 70 52 Q75 62 72 72 Q70 80 78 75 Q85 68 88 55 Q92 42 96 30 Q100 18 105 8 Q110 0 115 10 Q120 22 118 35 Q115 48 120 58 Q125 68 122 78 Q120 85 128 80 Q135 72 138 60 Q142 48 148 35 Q152 22 158 12 Q165 2 172 15 Q178 28 175 42 Q172 55 178 65 Q185 75 182 85 Q195 80 200 88 L200 100 Z'/%3E%3C/svg%3E")`,
-                backgroundRepeat: 'repeat-x',
-                backgroundPosition: 'bottom center',
-                backgroundSize: 'auto 100%',
               }} />
-
-              {/* Second layer - front flames */}
               <div style={{
                 position: 'absolute',
-                bottom: 0,
-                left: '10%',
-                right: '10%',
+                bottom: '-15%',
+                left: '25%',
+                width: '35%',
                 height: '70%',
-                opacity: 0.18,
+                background: 'radial-gradient(ellipse at center, rgba(255, 80, 30, 0.35) 0%, transparent 70%)',
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 70' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff7733' d='M0 70 L0 60 Q5 55 10 50 Q12 45 10 38 Q8 30 12 22 Q15 15 12 8 Q10 2 18 5 Q25 10 22 20 Q20 30 25 38 Q30 48 28 55 Q35 50 40 40 Q45 30 50 20 Q55 10 62 5 Q70 0 75 10 Q80 22 78 35 Q75 48 82 55 Q90 48 95 38 Q100 28 108 18 Q115 8 122 15 Q130 25 128 38 Q125 50 132 58 Q140 52 145 60 L150 70 Z'/%3E%3C/svg%3E")`,
-                backgroundRepeat: 'repeat-x',
-                backgroundPosition: 'bottom center',
-                backgroundSize: 'auto 100%',
+              }} />
+              <div style={{
+                position: 'absolute',
+                bottom: '-20%',
+                right: '-10%',
+                width: '45%',
+                height: '85%',
+                background: 'radial-gradient(ellipse at center, rgba(255, 120, 50, 0.4) 0%, transparent 70%)',
+                pointerEvents: 'none',
               }} />
 
-              {/* Bottom glow gradient */}
+              {/* Bottom heat glow */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: '40%',
-                background: 'linear-gradient(to top, rgba(255, 80, 30, 0.35), transparent)',
+                height: '50%',
+                background: 'linear-gradient(to top, rgba(255, 80, 30, 0.5), rgba(255, 100, 50, 0.2) 50%, transparent)',
                 pointerEvents: 'none',
+              }} />
+
+              {/* Animated ember line */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255, 150, 50, 0.8) 20%, rgba(255, 100, 30, 1) 50%, rgba(255, 150, 50, 0.8) 80%, transparent 100%)',
+                filter: 'blur(1px)',
+                animation: 'fireGlow 2s ease-in-out infinite',
               }} />
 
               <p style={{
