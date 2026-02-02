@@ -615,16 +615,16 @@ export function Calculator() {
               flexDirection: 'column',
               justifyContent: 'center',
             }}>
-              {/* Fire silhouette SVG background */}
+              {/* Fire silhouette SVG background - realistic flames */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
                 height: '100%',
-                opacity: 0.12,
+                opacity: 0.2,
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff6b35' d='M0 120 Q20 80 40 90 Q60 60 80 75 Q100 40 120 65 Q140 30 160 55 Q180 20 200 50 Q220 25 240 55 Q260 35 280 60 Q300 45 320 70 Q340 55 360 80 Q380 70 400 90 L400 120 Z'/%3E%3Cpath fill='%23ff4500' d='M0 120 Q30 90 60 100 Q90 70 120 85 Q150 55 180 75 Q210 50 240 70 Q270 55 300 80 Q330 70 360 90 Q390 85 400 95 L400 120 Z'/%3E%3Cpath fill='%23f7931e' d='M0 120 Q40 100 80 108 Q120 85 160 100 Q200 80 240 95 Q280 85 320 100 Q360 95 400 105 L400 120 Z'/%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 150' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='flame1' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='50%25' stop-color='%23ff6b35'/%3E%3Cstop offset='100%25' stop-color='%23ffd700' stop-opacity='0.8'/%3E%3C/linearGradient%3E%3ClinearGradient id='flame2' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='100%25' stop-color='%23ff6b35'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23flame1)' d='M0 150 L0 120 Q5 100 15 110 L20 90 Q25 70 35 85 L40 60 Q50 30 60 55 L65 70 Q70 85 80 75 L85 50 Q95 20 105 45 L110 65 Q115 80 125 70 L130 40 Q140 10 150 35 L155 55 Q160 70 170 60 L175 30 Q185 5 195 25 L200 50 Q205 70 215 55 L220 25 Q230 0 240 20 L245 45 Q250 65 260 50 L265 25 Q275 5 285 30 L290 55 Q295 75 305 60 L310 35 Q320 15 330 40 L335 60 Q340 75 350 65 L355 45 Q365 25 375 50 L380 70 Q385 85 395 80 L400 95 L400 150 Z'/%3E%3Cpath fill='url(%23flame2)' d='M0 150 L0 130 Q10 115 20 125 L30 105 Q40 85 50 100 L60 80 Q70 60 80 75 L90 55 Q100 35 110 55 L120 70 Q130 85 140 75 L150 55 Q160 40 170 60 L180 75 Q190 90 200 80 L210 60 Q220 45 230 65 L240 80 Q250 95 260 85 L270 65 Q280 50 290 70 L300 85 Q310 100 320 90 L330 70 Q340 55 350 75 L360 90 Q370 105 380 95 L390 110 Q395 120 400 115 L400 150 Z'/%3E%3Cpath fill='%23ff8c00' opacity='0.6' d='M0 150 L0 135 Q15 125 30 132 L50 118 Q65 105 80 115 L100 100 Q115 88 130 98 L150 85 Q165 75 180 88 L200 95 Q215 105 230 98 L250 88 Q265 80 280 92 L300 100 Q315 110 330 102 L350 112 Q365 120 380 115 L400 125 L400 150 Z'/%3E%3C/svg%3E")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'bottom center',
                 backgroundSize: '100% auto',
@@ -704,45 +704,47 @@ export function Calculator() {
               border: '1px solid rgba(0, 255, 132, 0.2)',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
             }}>
-              <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.5)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                {t('scenarios.monthlyImpact')}
-              </p>
-              <p style={{ margin: 0, fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 700, color: '#00ff84', fontFamily: "'Space Mono', monospace" }}>
-                +{formatCurrency(calc.improvedState.revenue - calc.currentState.revenue)}
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 12 }}>
-                <div>
-                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
-                    {t('scenarios.extraOrders')}
-                  </p>
-                  <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#fff' }}>
-                    +{formatNumber(Math.round(calc.improvedState.orders - calc.currentState.orders))}
-                  </p>
-                </div>
-                <div style={{ width: 1, height: 28, background: 'rgba(255, 255, 255, 0.1)' }} />
-                <div>
-                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
-                    {t('scenarios.newRoas')}
-                  </p>
-                  <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#fff' }}>
-                    {formatRoas(calc.improvedState.roas)}
-                  </p>
+              <div>
+                <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.5)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  {t('scenarios.monthlyImpact')}
+                </p>
+                <p style={{ margin: 0, fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 700, color: '#00ff84', fontFamily: "'Space Mono', monospace" }}>
+                  +{formatCurrency(calc.improvedState.revenue - calc.currentState.revenue)}
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 12 }}>
+                  <div>
+                    <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
+                      {t('scenarios.extraOrders')}
+                    </p>
+                    <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#fff' }}>
+                      +{formatNumber(Math.round(calc.improvedState.orders - calc.currentState.orders))}
+                    </p>
+                  </div>
+                  <div style={{ width: 1, height: 28, background: 'rgba(255, 255, 255, 0.1)' }} />
+                  <div>
+                    <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
+                      {t('scenarios.newRoas')}
+                    </p>
+                    <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#fff' }}>
+                      {formatRoas(calc.improvedState.roas)}
+                    </p>
+                  </div>
                 </div>
               </div>
+              {/* Gradual implementation note - inside green box */}
+              <p style={{
+                margin: '16px 0 0 0',
+                fontSize: 11,
+                color: 'rgba(0, 255, 132, 0.5)',
+                borderTop: '1px solid rgba(0, 255, 132, 0.15)',
+                paddingTop: 12,
+              }}>
+                {t('scenarios.gradualNote')}
+              </p>
             </div>
           </div>
-
-          {/* Gradual implementation note */}
-          <p style={{
-            margin: '12px 0 0 0',
-            fontSize: 12,
-            color: 'rgba(255, 255, 255, 0.4)',
-            paddingLeft: 8,
-          }}>
-            {t('scenarios.gradualNote')}
-          </p>
         </section>
 
         {/* ═══════════════ EFFICIENCY METRICS ═══════════════ */}
