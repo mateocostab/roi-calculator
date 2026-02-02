@@ -615,32 +615,30 @@ export function Calculator() {
               flexDirection: 'column',
               justifyContent: 'center',
             }}>
-              {/* Fire silhouette SVG background - sharp dramatic flames */}
+              {/* Fire silhouette - organic curved flames */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: '100%',
-                opacity: 0.15,
+                height: '70%',
+                opacity: 0.18,
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 180' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='f1' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='40%25' stop-color='%23ff6b35'/%3E%3Cstop offset='80%25' stop-color='%23ffa500'/%3E%3Cstop offset='100%25' stop-color='%23ffd700'/%3E%3C/linearGradient%3E%3ClinearGradient id='f2' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23cc3300'/%3E%3Cstop offset='100%25' stop-color='%23ff6b35'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23f1)' d='M0 180 L0 140 L8 130 L12 85 L18 120 L25 60 L32 100 L38 45 L45 80 L52 25 L60 70 L65 40 L72 90 L78 15 L88 65 L95 35 L102 80 L108 10 L118 55 L125 30 L132 75 L140 5 L150 50 L158 25 L165 70 L172 20 L182 60 L190 0 L200 45 L208 15 L218 55 L225 8 L235 48 L242 20 L252 62 L260 12 L270 52 L278 25 L288 68 L295 18 L305 58 L312 30 L322 72 L330 22 L340 65 L348 35 L358 78 L365 28 L375 70 L382 45 L392 85 L400 60 L400 180 Z'/%3E%3Cpath fill='url(%23f2)' d='M0 180 L0 145 L10 125 L15 95 L22 115 L30 75 L38 105 L45 65 L55 95 L62 55 L72 88 L80 50 L90 82 L98 45 L108 78 L118 40 L128 75 L138 48 L148 82 L158 52 L168 88 L178 58 L188 92 L198 62 L208 95 L218 68 L228 98 L238 72 L248 102 L258 78 L268 105 L278 82 L288 108 L298 88 L308 112 L318 92 L328 115 L338 98 L348 118 L358 102 L368 120 L378 108 L388 125 L400 115 L400 180 Z'/%3E%3Cpath fill='%23ff8c00' d='M0 180 L0 155 L20 140 L35 125 L50 138 L70 118 L90 132 L110 115 L130 128 L150 112 L170 125 L190 108 L210 122 L230 105 L250 120 L270 102 L290 118 L310 100 L330 115 L350 98 L370 112 L390 105 L400 120 L400 180 Z'/%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='fg' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='50%25' stop-color='%23ff8c00'/%3E%3Cstop offset='100%25' stop-color='%23ffd700'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23fg)' d='M0 120 C0 120 5 95 12 100 C20 105 22 70 30 75 C38 80 35 45 48 55 C55 62 52 30 65 42 C75 52 70 20 85 35 C95 48 88 15 105 30 C118 42 110 8 130 25 C145 40 138 5 158 22 C172 38 168 12 185 28 C198 42 195 18 212 32 C228 48 222 25 242 38 C258 52 255 30 272 42 C288 55 282 35 302 48 C318 60 315 42 332 55 C348 68 345 52 362 62 C378 72 375 58 392 68 C400 75 400 120 400 120 Z'/%3E%3Cpath fill='%23ff6b35' opacity='0.7' d='M0 120 C0 120 8 100 18 105 C28 110 30 85 42 90 C55 95 52 65 68 75 C82 85 78 55 95 68 C110 80 105 50 125 62 C142 75 138 48 158 60 C175 72 172 52 192 62 C210 72 205 55 228 65 C248 75 245 58 268 68 C288 78 285 62 308 72 C328 82 325 68 348 78 C368 88 365 75 388 85 C400 90 400 120 400 120 Z'/%3E%3Cpath fill='%23cc4400' opacity='0.5' d='M0 120 C0 120 15 105 30 108 C48 112 52 95 72 100 C92 105 95 90 118 95 C140 100 142 88 168 92 C192 96 195 85 222 90 C248 95 250 85 280 90 C308 95 312 88 342 92 C368 96 375 90 400 95 L400 120 Z'/%3E%3C/svg%3E")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'bottom center',
                 backgroundSize: '100% auto',
               }} />
 
-              {/* Animated glow effect */}
+              {/* Bottom glow */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '60%',
-                height: '3px',
-                background: 'linear-gradient(90deg, transparent, #ff6b35, #f7931e, #ff6b35, transparent)',
-                filter: 'blur(2px)',
-                animation: 'fireGlow 2s ease-in-out infinite',
+                left: 0,
+                right: 0,
+                height: '40%',
+                background: 'linear-gradient(to top, rgba(255, 100, 50, 0.25), transparent)',
+                pointerEvents: 'none',
               }} />
 
               <p style={{
@@ -648,7 +646,7 @@ export function Calculator() {
                 margin: 0,
                 fontSize: 11,
                 color: 'rgba(255, 200, 170, 0.9)',
-                marginBottom: 10,
+                marginBottom: 12,
                 textTransform: 'uppercase',
                 letterSpacing: '1px',
                 fontWeight: 600,
@@ -656,41 +654,35 @@ export function Calculator() {
               }}>
                 {t('loss.title')}
               </p>
-              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
-                <div>
+              {/* Stacked layout for large numbers */}
+              <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
                   <p style={{
                     margin: 0,
-                    fontSize: 'clamp(24px, 3vw, 32px)',
+                    fontSize: 'clamp(22px, 2.5vw, 28px)',
                     fontWeight: 700,
-                    background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
+                    color: '#ff9944',
                     fontFamily: "'Space Mono', monospace",
-                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 150, 50, 0.4))',
+                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 150, 50, 0.3)',
                   }}>
                     {formatCurrency(calc.additionalMonthlyRevenue)}
                   </p>
-                  <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.7)', fontWeight: 500 }}>
+                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 180, 130, 0.6)', fontWeight: 500 }}>
                     {t('loss.monthly')}
                   </p>
                 </div>
-                <div style={{ width: 1, height: 40, background: 'linear-gradient(180deg, transparent, rgba(255, 150, 80, 0.5), transparent)' }} />
-                <div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
                   <p style={{
                     margin: 0,
-                    fontSize: 'clamp(24px, 3vw, 32px)',
+                    fontSize: 'clamp(22px, 2.5vw, 28px)',
                     fontWeight: 700,
-                    background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
+                    color: '#ff6633',
                     fontFamily: "'Space Mono', monospace",
-                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 150, 50, 0.4))',
+                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 100, 50, 0.3)',
                   }}>
                     {formatCurrency(calc.additionalMonthlyRevenue * 12)}
                   </p>
-                  <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.7)', fontWeight: 500 }}>
+                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 180, 130, 0.6)', fontWeight: 500 }}>
                     {t('loss.annually')}
                   </p>
                 </div>
