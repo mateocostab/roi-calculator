@@ -155,7 +155,6 @@ export function generateProjectionData(
   const data: ProjectionDataPoint[] = [];
 
   let currentAdSpend = adSpend;
-  let currentAdSpendNoCro = adSpend; // Separate tracking for no-CRO scaling
   let currentCumulative = 0;
   let improvedCumulative = 0;
   let scaledCumulative = 0;
@@ -195,12 +194,11 @@ export function generateProjectionData(
     const scaledRevenue = scaledVisitors * (scaledCVR / 100) * aov;
     scaledCumulative += scaledRevenue;
 
-    // Scaled state WITHOUT CRO (same reinvestment logic, but no CVR improvement)
-    const adSpendRatioNoCro = adSpend > 0 ? currentAdSpendNoCro / adSpend : 1;
-    const scaledVisitorRatioNoCro = Math.sqrt(adSpendRatioNoCro);
-    const scaledVisitorsNoCro = monthlyVisitors * scaledVisitorRatioNoCro;
-    const cvrDegradationNoCro = Math.pow(scaledVisitorRatioNoCro, -CVR_DEGRADATION_FACTOR);
-    const scaledCVRNoCro = currentCVR * cvrDegradationNoCro; // Original CVR, no improvement
+    // Scaled state WITHOUT CRO - uses SAME ad spend as CRO scaling
+    // This shows: "What if you had the same ad budget but didn't optimize CVR?"
+    // Same visitors from same ad spend, but CVR degrades without CRO improvement
+    const scaledVisitorsNoCro = scaledVisitors; // Same visitors from same ad spend
+    const scaledCVRNoCro = currentCVR * cvrDegradation; // Original CVR with degradation
 
     const scaledNoCroRevenue = scaledVisitorsNoCro * (scaledCVRNoCro / 100) * aov;
     scaledNoCroCumulative += scaledNoCroRevenue;
@@ -217,15 +215,10 @@ export function generateProjectionData(
       scaledNoCroCumulative,
     });
 
-    // Calculate reinvestment for next month (with CRO)
+    // Calculate reinvestment for next month (based on CRO scaling revenue)
     const additionalRevenue = scaledRevenue - currentMonthlyRevenue;
     const reinvestment = additionalRevenue * (reinvestmentPercent / 100);
     currentAdSpend += reinvestment;
-
-    // Calculate reinvestment for no-CRO path
-    const additionalRevenueNoCro = scaledNoCroRevenue - currentMonthlyRevenue;
-    const reinvestmentNoCro = additionalRevenueNoCro * (reinvestmentPercent / 100);
-    currentAdSpendNoCro += reinvestmentNoCro;
   }
 
   return data;
