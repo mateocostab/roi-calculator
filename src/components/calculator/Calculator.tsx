@@ -669,29 +669,35 @@ export function Calculator() {
                       margin: 0,
                       fontSize: 'clamp(24px, 3vw, 32px)',
                       fontWeight: 700,
-                      color: '#ff9944',
+                      background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                       fontFamily: "'Space Mono', monospace",
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                      filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 150, 50, 0.3))',
                     }}>
                       {formatCurrency(calc.additionalMonthlyRevenue)}
                     </p>
-                    <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.5)' }}>
+                    <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.6)' }}>
                       {t('loss.monthly')}
                     </p>
                   </div>
-                  <div style={{ width: 1, height: 40, background: 'linear-gradient(180deg, transparent, rgba(255, 120, 60, 0.4), transparent)' }} />
+                  <div style={{ width: 1, height: 40, background: 'linear-gradient(180deg, transparent, rgba(255, 120, 60, 0.5), transparent)' }} />
                   <div>
                     <p style={{
                       margin: 0,
                       fontSize: 'clamp(24px, 3vw, 32px)',
                       fontWeight: 700,
-                      color: '#ff6633',
+                      background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                       fontFamily: "'Space Mono', monospace",
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                      filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 150, 50, 0.3))',
                     }}>
                       {formatCurrency(calc.additionalMonthlyRevenue * 12)}
                     </p>
-                    <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.5)' }}>
+                    <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.6)' }}>
                       {t('loss.annually')}
                     </p>
                   </div>
