@@ -33,10 +33,13 @@ export const es = {
   'efficiency.title': 'Métricas de Eficiencia',
   'efficiency.roas': 'ROAS',
   'efficiency.roasDesc': 'Retorno sobre inversión publicitaria',
+  'efficiency.roasTooltip': 'Return On Ad Spend: Por cada $1 en publicidad, cuántos $ generas en ventas',
   'efficiency.cpa': 'CPA',
   'efficiency.cpaDesc': 'Costo por adquisición',
+  'efficiency.cpaTooltip': 'Cost Per Acquisition: Cuánto te cuesta conseguir cada cliente',
   'efficiency.rps': 'RPS',
   'efficiency.rpsDesc': 'La métrica #1 en CRO',
+  'efficiency.rpsTooltip': 'Revenue Per Session: Ingresos promedio por cada visitante. La métrica más importante en CRO porque captura conversión Y ticket promedio',
   'efficiency.current': 'Actual',
   'efficiency.improved': 'Con CRO',
 
@@ -67,8 +70,14 @@ export const es = {
   'roi.additionalRevenue': 'Ingresos Adicionales',
   'roi.roiMultiple': 'ROI',
   'roi.payback': 'Recuperación',
+  'roi.paybackTooltip': 'Tiempo estimado para recuperar tu inversión inicial con los ingresos adicionales generados',
   'roi.guaranteeTitle': 'Garantía de Resultados',
   'roi.guaranteeText': 'Si en 3 meses no duplicas tu inversión con nosotros, te devolvemos el dinero.',
+
+  // Loss aversion message
+  'loss.title': 'Sin optimización, estás perdiendo',
+  'loss.monthly': 'cada mes',
+  'loss.annually': 'al año',
 
   // Chart
   'chart.title': 'Proyección de Ingresos',

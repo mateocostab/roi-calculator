@@ -35,10 +35,13 @@ export const en: Record<TranslationKey, string> = {
   'efficiency.title': 'Efficiency Metrics',
   'efficiency.roas': 'ROAS',
   'efficiency.roasDesc': 'Return on ad spend',
+  'efficiency.roasTooltip': 'Return On Ad Spend: For every $1 spent on ads, how many $ you generate in sales',
   'efficiency.cpa': 'CPA',
   'efficiency.cpaDesc': 'Cost per acquisition',
+  'efficiency.cpaTooltip': 'Cost Per Acquisition: How much it costs to acquire each customer',
   'efficiency.rps': 'RPS',
   'efficiency.rpsDesc': 'The #1 CRO metric',
+  'efficiency.rpsTooltip': 'Revenue Per Session: Average revenue per visitor. The most important CRO metric because it captures both conversion rate AND average order value',
   'efficiency.current': 'Current',
   'efficiency.improved': 'With CRO',
 
@@ -69,8 +72,14 @@ export const en: Record<TranslationKey, string> = {
   'roi.additionalRevenue': 'Additional Revenue',
   'roi.roiMultiple': 'ROI',
   'roi.payback': 'Payback',
+  'roi.paybackTooltip': 'Estimated time to recover your initial investment from additional revenue generated',
   'roi.guaranteeTitle': 'Results Guarantee',
   'roi.guaranteeText': 'If you don\'t double your investment with us in 3 months, we refund your money.',
+
+  // Loss aversion message
+  'loss.title': 'Without optimization, you\'re losing',
+  'loss.monthly': 'every month',
+  'loss.annually': 'per year',
 
   // Chart
   'chart.title': 'Revenue Projection',

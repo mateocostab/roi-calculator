@@ -435,6 +435,57 @@ export function Calculator() {
           </div>
         </section>
 
+        {/* ═══════════════ LOSS AVERSION BANNER ═══════════════ */}
+        <section className="animate-in delay-2" style={{ marginBottom: 24 }}>
+          <div style={{
+            padding: '24px 32px',
+            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%)',
+            border: '1px solid rgba(239, 68, 68, 0.3)',
+            borderRadius: 16,
+            textAlign: 'center',
+          }}>
+            <p style={{
+              margin: 0,
+              fontSize: 14,
+              color: 'rgba(255, 255, 255, 0.6)',
+              marginBottom: 8,
+            }}>
+              {t('loss.title')}
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
+              <div>
+                <p style={{
+                  margin: 0,
+                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontWeight: 700,
+                  color: '#ef4444',
+                  fontFamily: "'Space Mono', monospace",
+                }}>
+                  {formatCurrency(calc.additionalMonthlyRevenue)}
+                </p>
+                <p style={{ margin: 0, fontSize: 12, color: 'rgba(255, 255, 255, 0.4)' }}>
+                  {t('loss.monthly')}
+                </p>
+              </div>
+              <div style={{ width: 1, height: 40, background: 'rgba(255, 255, 255, 0.1)' }} />
+              <div>
+                <p style={{
+                  margin: 0,
+                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontWeight: 700,
+                  color: '#ef4444',
+                  fontFamily: "'Space Mono', monospace",
+                }}>
+                  {formatCurrency(calc.additionalMonthlyRevenue * 12)}
+                </p>
+                <p style={{ margin: 0, fontSize: 12, color: 'rgba(255, 255, 255, 0.4)' }}>
+                  {t('loss.annually')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ═══════════════ SCENARIO SELECTOR ═══════════════ */}
         <section className="animate-in delay-2" style={{ marginBottom: 24 }}>
           <div className="section-header" style={{ paddingLeft: 8, marginBottom: 20 }}>
@@ -658,6 +709,22 @@ export function Calculator() {
             <div className="glass-card-highlight" style={{ padding: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <p className="metric-label metric-label-green" style={{ margin: 0 }}>{t('efficiency.rps')}</p>
+                <span
+                  title={t('efficiency.rpsTooltip')}
+                  style={{
+                    cursor: 'help',
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    background: 'rgba(0, 255, 132, 0.2)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 10,
+                    color: '#00ff84',
+                    fontWeight: 600,
+                  }}
+                >?</span>
                 <span style={{
                   fontSize: 9,
                   fontWeight: 600,
@@ -695,7 +762,25 @@ export function Calculator() {
 
             {/* ROAS */}
             <div className="glass-card" style={{ padding: 24 }}>
-              <p className="metric-label">{t('efficiency.roas')}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                <p className="metric-label" style={{ margin: 0 }}>{t('efficiency.roas')}</p>
+                <span
+                  title={t('efficiency.roasTooltip')}
+                  style={{
+                    cursor: 'help',
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 10,
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontWeight: 600,
+                  }}
+                >?</span>
+              </div>
               <p className="metric-sublabel">{t('efficiency.roasDesc')}</p>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
                 <span className="metric-value metric-value-dim" style={{ fontSize: 18, textDecoration: 'line-through' }}>
@@ -719,7 +804,25 @@ export function Calculator() {
 
             {/* CPA */}
             <div className="glass-card" style={{ padding: 24 }}>
-              <p className="metric-label">{t('efficiency.cpa')}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                <p className="metric-label" style={{ margin: 0 }}>{t('efficiency.cpa')}</p>
+                <span
+                  title={t('efficiency.cpaTooltip')}
+                  style={{
+                    cursor: 'help',
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 10,
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontWeight: 600,
+                  }}
+                >?</span>
+              </div>
               <p className="metric-sublabel">{t('efficiency.cpaDesc')}</p>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
                 <span className="metric-value metric-value-dim" style={{ fontSize: 18, textDecoration: 'line-through' }}>
@@ -1034,7 +1137,25 @@ export function Calculator() {
 
             {/* Payback */}
             <div className="glass-card-static" style={{ padding: 20 }}>
-              <p className="metric-label">{t('roi.payback')}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <p className="metric-label" style={{ margin: 0 }}>{t('roi.payback')}</p>
+                <span
+                  title={t('roi.paybackTooltip')}
+                  style={{
+                    cursor: 'help',
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 10,
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    fontWeight: 600,
+                  }}
+                >?</span>
+              </div>
               <p className="metric-value" style={{ marginTop: 8 }}>
                 {calc.roiMetrics.paybackMonths === Infinity
                   ? '∞'
