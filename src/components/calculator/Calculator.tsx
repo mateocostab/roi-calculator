@@ -604,102 +604,87 @@ export function Calculator() {
               borderRadius: 12,
               overflow: 'hidden',
               background: `
-                radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 107, 53, 0.4) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 40% at 30% 100%, rgba(255, 69, 0, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 70% 100%, rgba(247, 147, 30, 0.3) 0%, transparent 50%),
-                linear-gradient(180deg, rgba(20, 20, 20, 0.95) 0%, rgba(40, 20, 15, 0.98) 100%)
+                radial-gradient(ellipse 80% 40% at 50% 100%, rgba(255, 107, 53, 0.35) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(20, 20, 20, 0.98) 0%, rgba(35, 18, 12, 0.98) 100%)
               `,
               border: '1px solid rgba(255, 107, 53, 0.4)',
-              boxShadow: '0 0 40px rgba(255, 107, 53, 0.15), inset 0 -20px 60px rgba(255, 69, 0, 0.1)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
+              boxShadow: '0 0 30px rgba(255, 107, 53, 0.1)',
             }}>
-              {/* Stylized flame silhouette - curved leaf/teardrop shapes with negative space */}
+              {/* Stylized flame silhouette - shorter, sharper flames */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: '75%',
-                opacity: 0.22,
+                height: '50%',
+                opacity: 0.2,
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff6633' d='M0,60 L0,55 Q2,52 4,55 Q6,50 8,45 Q10,38 8,30 Q6,20 10,12 Q12,6 14,10 Q16,18 14,28 Q12,38 16,45 Q18,50 20,55 Q22,52 24,55 Q26,48 28,40 Q30,30 28,22 Q26,12 30,5 Q33,0 36,6 Q38,14 36,24 Q34,34 38,42 Q42,52 44,55 Q46,50 50,55 Q52,45 56,35 Q60,22 58,12 Q56,4 62,2 Q68,0 70,8 Q72,18 68,30 Q64,42 70,50 Q74,55 78,55 Q80,48 84,38 Q88,25 86,15 Q84,6 90,3 Q96,0 98,10 Q100,22 96,35 Q92,48 98,55 Q102,50 106,55 Q108,45 112,32 Q116,18 114,8 Q112,2 118,0 Q124,-2 126,8 Q128,20 124,34 Q120,48 126,55 Q130,52 134,55 Q136,48 140,38 Q144,26 142,16 Q140,6 146,2 Q152,-2 156,6 Q160,16 156,28 Q152,40 158,50 Q162,55 166,55 Q168,50 172,55 Q174,48 178,40 Q182,28 180,18 Q178,8 184,4 Q190,0 192,10 Q194,22 190,35 Q186,48 192,55 Q196,52 200,55 L200,60 Z'/%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff6633' d='M0,40 L0,38 C2,36 3,38 5,36 C7,32 6,26 8,20 C9,14 11,10 13,14 C15,20 14,28 17,34 C19,38 21,36 23,38 C25,34 26,28 28,22 C30,16 32,12 35,16 C38,22 36,30 40,36 C42,38 44,36 47,38 C49,32 51,24 54,18 C57,12 60,8 63,12 C66,18 64,28 68,35 C70,38 73,36 76,38 C78,34 80,26 83,20 C86,14 89,10 92,14 C95,20 93,30 97,36 C99,38 102,36 105,38 C107,32 110,24 114,16 C118,8 122,4 126,10 C130,18 127,30 132,36 C134,38 137,36 140,38 C142,34 145,28 148,22 C151,16 154,12 157,16 C160,22 158,32 162,37 C164,38 167,36 170,38 C172,34 174,28 177,22 C180,16 183,12 186,16 C189,22 187,32 191,37 C193,38 196,36 200,38 L200,40 Z'/%3E%3C/svg%3E")`,
                 backgroundRepeat: 'repeat-x',
                 backgroundPosition: 'bottom center',
                 backgroundSize: 'auto 100%',
               }} />
 
-              {/* Second layer - smaller front flames */}
+              {/* Front flames layer */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: '45%',
-                opacity: 0.18,
+                height: '30%',
+                opacity: 0.15,
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 35' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff8844' d='M0,35 L0,32 Q3,30 6,32 Q8,28 10,22 Q12,15 10,10 Q8,5 12,3 Q16,1 18,6 Q20,12 18,20 Q16,28 20,32 Q24,30 28,32 Q30,26 34,18 Q38,10 36,5 Q34,1 40,0 Q46,-1 48,5 Q50,12 46,22 Q42,30 48,32 Q52,28 56,32 Q58,25 62,16 Q66,8 64,3 Q62,0 68,0 Q74,0 76,6 Q78,14 74,24 Q70,32 76,32 Q80,28 84,32 Q86,26 90,18 Q94,8 92,3 Q90,0 96,0 Q102,0 104,6 Q106,14 102,24 Q98,32 104,32 Q108,28 112,32 Q114,26 118,18 Q122,8 120,3 Q118,0 124,0 Q130,0 132,6 Q134,14 130,24 Q126,32 132,32 Q136,28 140,32 Q144,28 148,32 L150,35 Z'/%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 25' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff8844' d='M0,25 L0,23 C3,21 5,23 8,21 C11,17 10,12 13,8 C15,5 18,7 20,12 C22,18 24,22 27,23 C30,21 33,23 36,19 C39,14 38,9 42,6 C45,4 48,8 50,14 C52,20 55,23 58,23 C61,21 64,23 67,19 C70,14 69,9 73,6 C76,4 79,8 81,14 C83,20 86,23 89,23 C92,21 95,23 98,19 C101,14 100,9 104,6 C107,4 110,8 112,14 C114,20 117,23 120,23 C123,21 126,23 129,19 C132,14 131,9 135,6 C138,4 141,8 143,14 C145,20 148,22 150,23 L150,25 Z'/%3E%3C/svg%3E")`,
                 backgroundRepeat: 'repeat-x',
                 backgroundPosition: 'bottom center',
                 backgroundSize: 'auto 100%',
               }} />
 
-              {/* Bottom glow */}
+              {/* Bottom glow line */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: '25%',
-                background: 'linear-gradient(to top, rgba(255, 80, 30, 0.4), transparent)',
-                pointerEvents: 'none',
+                height: '3px',
+                background: 'linear-gradient(90deg, transparent, rgba(255, 100, 50, 0.6), rgba(255, 150, 50, 0.8), rgba(255, 100, 50, 0.6), transparent)',
               }} />
 
-              <p style={{
-                position: 'relative',
-                margin: 0,
-                fontSize: 11,
-                color: 'rgba(255, 200, 170, 0.9)',
-                marginBottom: 12,
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                fontWeight: 600,
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
-              }}>
-                {t('loss.title')}
-              </p>
-              {/* Stacked layout for large numbers */}
-              <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-                  <p style={{
-                    margin: 0,
-                    fontSize: 'clamp(22px, 2.5vw, 28px)',
-                    fontWeight: 700,
-                    color: '#ff9944',
-                    fontFamily: "'Space Mono', monospace",
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 150, 50, 0.3)',
-                  }}>
-                    {formatCurrency(calc.additionalMonthlyRevenue)}
-                  </p>
-                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 180, 130, 0.6)', fontWeight: 500 }}>
-                    {t('loss.monthly')}
-                  </p>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-                  <p style={{
-                    margin: 0,
-                    fontSize: 'clamp(22px, 2.5vw, 28px)',
-                    fontWeight: 700,
-                    color: '#ff6633',
-                    fontFamily: "'Space Mono', monospace",
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 100, 50, 0.3)',
-                  }}>
-                    {formatCurrency(calc.additionalMonthlyRevenue * 12)}
-                  </p>
-                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 180, 130, 0.6)', fontWeight: 500 }}>
-                    {t('loss.annually')}
-                  </p>
+              {/* Content - matching green card alignment */}
+              <div style={{ position: 'relative' }}>
+                <p style={{
+                  margin: 0,
+                  fontSize: 11,
+                  color: 'rgba(255, 200, 170, 0.8)',
+                  marginBottom: 8,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
+                  fontWeight: 500,
+                }}>
+                  {t('loss.title')}
+                </p>
+                <p style={{
+                  margin: 0,
+                  fontSize: 'clamp(24px, 3vw, 32px)',
+                  fontWeight: 700,
+                  color: '#ff9944',
+                  fontFamily: "'Space Mono', monospace",
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                }}>
+                  {formatCurrency(calc.additionalMonthlyRevenue)}
+                </p>
+                <p style={{ margin: '2px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.5)' }}>
+                  {t('loss.monthly')}
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 12 }}>
+                  <div>
+                    <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 180, 130, 0.4)', marginBottom: 2 }}>
+                      {t('loss.annually')}
+                    </p>
+                    <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#ff7744' }}>
+                      {formatCurrency(calc.additionalMonthlyRevenue * 12)}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
