@@ -72,7 +72,9 @@ export const en: Record<TranslationKey, string> = {
   'roi.additionalRevenue': 'Additional Revenue',
   'roi.roiMultiple': 'ROI',
   'roi.payback': 'Payback',
-  'roi.paybackTooltip': 'Estimated time to recover your initial investment from additional revenue generated',
+  'roi.paybackTooltip': 'Estimated time to recover your total investment for the selected period',
+  'roi.roiAt3Months': 'ROI at 3 months',
+  'roi.roiAt3MonthsTooltip': 'Return on the first 3 months of investment. We guarantee at least 2x.',
   'roi.guaranteeTitle': 'Results Guarantee',
   'roi.guaranteeText': 'If you don\'t double your investment with us in 3 months, we refund your money.',
 

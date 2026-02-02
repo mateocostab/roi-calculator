@@ -353,6 +353,34 @@ describe('calculateROI', () => {
     const result = calculateROI(3000, 6, 0, zeroRevenueData);
     expect(result.paybackMonths).toBe(Infinity);
   });
+
+  it('calculates ROI at 3 months correctly (aligned with guarantee)', () => {
+    // ROI at 3 months = cumulative additional revenue at month 3 / (croInvestment × 3)
+    // Cumulative additional at month 3:
+    //   Month 1: 106250 - 100000 = 6250
+    //   Month 2: 115000 - 100000 = 15000
+    //   Month 3: 125000 - 100000 = 25000
+    //   Total: 46250
+    // 3-month investment: 3000 × 3 = 9000
+    // ROI at 3 months: 46250 / 9000 = 5.14x
+    const result = calculateROI(3000, 6, 128750, mockProjectionData);
+    expect(result.roiAt3Months).toBeCloseTo(5.14, 1);
+  });
+
+  it('returns 0 for roiAt3Months when investment is 0', () => {
+    const result = calculateROI(0, 6, 128750, mockProjectionData);
+    expect(result.roiAt3Months).toBe(0);
+  });
+
+  it('handles projection data with less than 3 months for roiAt3Months', () => {
+    const shortData = mockProjectionData.slice(0, 2);
+    const result = calculateROI(3000, 2, 21250, shortData);
+    // With only 2 months, use all available data
+    // Cumulative additional: 6250 + 15000 = 21250
+    // 2-month investment: 3000 × 2 = 6000
+    // ROI: 21250 / 6000 = 3.54x
+    expect(result.roiAt3Months).toBeCloseTo(3.54, 1);
+  });
 });
 
 describe('getQualificationTier', () => {

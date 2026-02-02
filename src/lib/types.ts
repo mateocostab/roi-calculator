@@ -56,6 +56,7 @@ export interface ROIMetrics {
   roiMultiple: number;
   roiPercent: number;
   paybackMonths: number;
+  roiAt3Months: number; // ROI at 3 months, aligned with guarantee
 }
 
 export interface CalculatorState {

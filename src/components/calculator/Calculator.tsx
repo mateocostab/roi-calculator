@@ -435,57 +435,6 @@ export function Calculator() {
           </div>
         </section>
 
-        {/* ═══════════════ LOSS AVERSION BANNER ═══════════════ */}
-        <section className="animate-in delay-2" style={{ marginBottom: 24 }}>
-          <div style={{
-            padding: '24px 32px',
-            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%)',
-            border: '1px solid rgba(239, 68, 68, 0.3)',
-            borderRadius: 16,
-            textAlign: 'center',
-          }}>
-            <p style={{
-              margin: 0,
-              fontSize: 14,
-              color: 'rgba(255, 255, 255, 0.6)',
-              marginBottom: 8,
-            }}>
-              {t('loss.title')}
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
-              <div>
-                <p style={{
-                  margin: 0,
-                  fontSize: 'clamp(28px, 4vw, 40px)',
-                  fontWeight: 700,
-                  color: '#ef4444',
-                  fontFamily: "'Space Mono', monospace",
-                }}>
-                  {formatCurrency(calc.additionalMonthlyRevenue)}
-                </p>
-                <p style={{ margin: 0, fontSize: 12, color: 'rgba(255, 255, 255, 0.4)' }}>
-                  {t('loss.monthly')}
-                </p>
-              </div>
-              <div style={{ width: 1, height: 40, background: 'rgba(255, 255, 255, 0.1)' }} />
-              <div>
-                <p style={{
-                  margin: 0,
-                  fontSize: 'clamp(28px, 4vw, 40px)',
-                  fontWeight: 700,
-                  color: '#ef4444',
-                  fontFamily: "'Space Mono', monospace",
-                }}>
-                  {formatCurrency(calc.additionalMonthlyRevenue * 12)}
-                </p>
-                <p style={{ margin: 0, fontSize: 12, color: 'rgba(255, 255, 255, 0.4)' }}>
-                  {t('loss.annually')}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ═══════════════ SCENARIO SELECTOR ═══════════════ */}
         <section className="animate-in delay-2" style={{ marginBottom: 24 }}>
           <div className="section-header" style={{ paddingLeft: 8, marginBottom: 20 }}>
@@ -641,60 +590,159 @@ export function Calculator() {
             })}
           </div>
 
-          {/* Selected scenario impact summary */}
+          {/* Loss Aversion + Monthly Impact Grid */}
           <div style={{
             marginTop: 20,
-            padding: '20px 24px',
-            background: 'linear-gradient(135deg, rgba(0, 255, 132, 0.1) 0%, rgba(0, 150, 77, 0.05) 100%)',
-            borderRadius: 12,
-            border: '1px solid rgba(0, 255, 132, 0.2)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: 16,
           }}>
+            {/* Fire-themed loss aversion banner */}
             <div style={{
+              position: 'relative',
+              padding: '24px',
+              borderRadius: 12,
+              overflow: 'hidden',
+              background: `
+                radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 107, 53, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 30% 100%, rgba(255, 69, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 70% 100%, rgba(247, 147, 30, 0.3) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(20, 20, 20, 0.95) 0%, rgba(40, 20, 15, 0.98) 100%)
+              `,
+              border: '1px solid rgba(255, 107, 53, 0.4)',
+              boxShadow: '0 0 40px rgba(255, 107, 53, 0.15), inset 0 -20px 60px rgba(255, 69, 0, 0.1)',
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: 16,
+              flexDirection: 'column',
+              justifyContent: 'center',
             }}>
-              <div>
-                <p style={{ margin: 0, fontSize: 13, color: 'rgba(255, 255, 255, 0.5)', marginBottom: 4 }}>
-                  {t('scenarios.monthlyImpact')}
-                </p>
-                <p style={{ margin: 0, fontSize: 24, fontWeight: 700, color: '#00ff84' }}>
-                  +{formatCurrency(calc.improvedState.revenue - calc.currentState.revenue)}
-                </p>
+              {/* Fire silhouette SVG background */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: '100%',
+                opacity: 0.12,
+                pointerEvents: 'none',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23ff6b35' d='M0 120 Q20 80 40 90 Q60 60 80 75 Q100 40 120 65 Q140 30 160 55 Q180 20 200 50 Q220 25 240 55 Q260 35 280 60 Q300 45 320 70 Q340 55 360 80 Q380 70 400 90 L400 120 Z'/%3E%3Cpath fill='%23ff4500' d='M0 120 Q30 90 60 100 Q90 70 120 85 Q150 55 180 75 Q210 50 240 70 Q270 55 300 80 Q330 70 360 90 Q390 85 400 95 L400 120 Z'/%3E%3Cpath fill='%23f7931e' d='M0 120 Q40 100 80 108 Q120 85 160 100 Q200 80 240 95 Q280 85 320 100 Q360 95 400 105 L400 120 Z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'bottom center',
+                backgroundSize: '100% auto',
+              }} />
+
+              {/* Animated glow effect */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '60%',
+                height: '3px',
+                background: 'linear-gradient(90deg, transparent, #ff6b35, #f7931e, #ff6b35, transparent)',
+                filter: 'blur(2px)',
+                animation: 'fireGlow 2s ease-in-out infinite',
+              }} />
+
+              <p style={{
+                position: 'relative',
+                margin: 0,
+                fontSize: 11,
+                color: 'rgba(255, 180, 150, 0.7)',
+                marginBottom: 8,
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                fontWeight: 500,
+              }}>
+                {t('loss.title')}
+              </p>
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+                <div>
+                  <p style={{
+                    margin: 0,
+                    fontSize: 'clamp(24px, 3vw, 32px)',
+                    fontWeight: 700,
+                    background: 'linear-gradient(180deg, #ffcc00 0%, #ff6b35 50%, #ff4500 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontFamily: "'Space Mono', monospace",
+                    filter: 'drop-shadow(0 0 8px rgba(255, 107, 53, 0.3))',
+                  }}>
+                    {formatCurrency(calc.additionalMonthlyRevenue)}
+                  </p>
+                  <p style={{ margin: '2px 0 0 0', fontSize: 11, color: 'rgba(255, 150, 100, 0.5)', fontWeight: 500 }}>
+                    {t('loss.monthly')}
+                  </p>
+                </div>
+                <div style={{ width: 1, height: 36, background: 'linear-gradient(180deg, transparent, rgba(255, 107, 53, 0.4), transparent)' }} />
+                <div>
+                  <p style={{
+                    margin: 0,
+                    fontSize: 'clamp(24px, 3vw, 32px)',
+                    fontWeight: 700,
+                    background: 'linear-gradient(180deg, #ffcc00 0%, #ff6b35 50%, #ff4500 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontFamily: "'Space Mono', monospace",
+                    filter: 'drop-shadow(0 0 8px rgba(255, 107, 53, 0.3))',
+                  }}>
+                    {formatCurrency(calc.additionalMonthlyRevenue * 12)}
+                  </p>
+                  <p style={{ margin: '2px 0 0 0', fontSize: 11, color: 'rgba(255, 150, 100, 0.5)', fontWeight: 500 }}>
+                    {t('loss.annually')}
+                  </p>
+                </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-                <div style={{ textAlign: 'center' }}>
-                  <p style={{ margin: 0, fontSize: 12, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
+            </div>
+
+            {/* Monthly Impact */}
+            <div style={{
+              padding: '24px',
+              background: 'linear-gradient(135deg, rgba(0, 255, 132, 0.1) 0%, rgba(0, 150, 77, 0.05) 100%)',
+              borderRadius: 12,
+              border: '1px solid rgba(0, 255, 132, 0.2)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}>
+              <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.5)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                {t('scenarios.monthlyImpact')}
+              </p>
+              <p style={{ margin: 0, fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 700, color: '#00ff84', fontFamily: "'Space Mono', monospace" }}>
+                +{formatCurrency(calc.improvedState.revenue - calc.currentState.revenue)}
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 12 }}>
+                <div>
+                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
                     {t('scenarios.extraOrders')}
                   </p>
-                  <p style={{ margin: 0, fontSize: 18, fontWeight: 600, color: '#fff' }}>
+                  <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#fff' }}>
                     +{formatNumber(Math.round(calc.improvedState.orders - calc.currentState.orders))}
                   </p>
                 </div>
-                <div style={{ width: 1, height: 32, background: 'rgba(255, 255, 255, 0.1)' }} />
-                <div style={{ textAlign: 'center' }}>
-                  <p style={{ margin: 0, fontSize: 12, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
+                <div style={{ width: 1, height: 28, background: 'rgba(255, 255, 255, 0.1)' }} />
+                <div>
+                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', marginBottom: 2 }}>
                     {t('scenarios.newRoas')}
                   </p>
-                  <p style={{ margin: 0, fontSize: 18, fontWeight: 600, color: '#fff' }}>
+                  <p style={{ margin: 0, fontSize: 16, fontWeight: 600, color: '#fff' }}>
                     {formatRoas(calc.improvedState.roas)}
                   </p>
                 </div>
               </div>
             </div>
-            {/* Gradual implementation note */}
-            <p style={{
-              margin: '12px 0 0 0',
-              fontSize: 12,
-              color: 'rgba(255, 255, 255, 0.4)',
-              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-              paddingTop: 12,
-            }}>
-              {t('scenarios.gradualNote')}
-            </p>
           </div>
+
+          {/* Gradual implementation note */}
+          <p style={{
+            margin: '12px 0 0 0',
+            fontSize: 12,
+            color: 'rgba(255, 255, 255, 0.4)',
+            paddingLeft: 8,
+          }}>
+            {t('scenarios.gradualNote')}
+          </p>
         </section>
 
         {/* ═══════════════ EFFICIENCY METRICS ═══════════════ */}
@@ -1163,6 +1211,50 @@ export function Calculator() {
                     ? t('format.lessThanOneMonth')
                     : `${Math.ceil(calc.roiMetrics.paybackMonths)} ${calc.roiMetrics.paybackMonths <= 1 ? t('format.month') : t('format.months')}`
                 }
+              </p>
+            </div>
+
+            {/* ROI at 3 months - aligned with guarantee */}
+            <div style={{
+              padding: 20,
+              borderRadius: 12,
+              background: 'linear-gradient(135deg, rgba(0, 255, 132, 0.12) 0%, rgba(0, 255, 132, 0.04) 100%)',
+              border: '1px solid rgba(0, 255, 132, 0.3)',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <p className="metric-label" style={{ margin: 0, color: 'rgba(0, 255, 132, 0.8)' }}>{t('roi.roiAt3Months')}</p>
+                <span
+                  title={t('roi.roiAt3MonthsTooltip')}
+                  style={{
+                    cursor: 'help',
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    background: 'rgba(0, 255, 132, 0.2)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 10,
+                    color: 'rgba(0, 255, 132, 0.7)',
+                    fontWeight: 600,
+                  }}
+                >?</span>
+              </div>
+              <p style={{
+                margin: '8px 0 0 0',
+                fontSize: 28,
+                fontWeight: 700,
+                color: '#00ff84',
+                fontFamily: "'Space Mono', monospace",
+              }}>
+                {calc.roiMetrics.roiMultiple > MAX_REALISTIC_ROI ? '—' : `${calc.roiMetrics.roiAt3Months.toFixed(1)}x`}
+              </p>
+              <p style={{
+                margin: '4px 0 0 0',
+                fontSize: 11,
+                color: 'rgba(0, 255, 132, 0.6)',
+              }}>
+                {calc.roiMetrics.roiAt3Months >= 2 ? '✓ ' : ''}{t('roi.guaranteeTitle')}: 2x
               </p>
             </div>
 

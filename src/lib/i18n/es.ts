@@ -70,7 +70,9 @@ export const es = {
   'roi.additionalRevenue': 'Ingresos Adicionales',
   'roi.roiMultiple': 'ROI',
   'roi.payback': 'Recuperación',
-  'roi.paybackTooltip': 'Tiempo estimado para recuperar tu inversión inicial con los ingresos adicionales generados',
+  'roi.paybackTooltip': 'Tiempo estimado para recuperar tu inversión total del período seleccionado',
+  'roi.roiAt3Months': 'ROI a 3 meses',
+  'roi.roiAt3MonthsTooltip': 'Retorno sobre la inversión de los primeros 3 meses. Garantizamos mínimo 2x.',
   'roi.guaranteeTitle': 'Garantía de Resultados',
   'roi.guaranteeText': 'Si en 3 meses no duplicas tu inversión con nosotros, te devolvemos el dinero.',
 

@@ -246,12 +246,23 @@ export function calculateROI(
     }
   }
 
+  // ROI at 3 months (aligned with guarantee)
+  // Uses min(3, available months) for cases with shorter projections
+  const monthsFor3mROI = Math.min(3, projectionData.length);
+  let cumulativeAdditionalAt3m = 0;
+  for (let i = 0; i < monthsFor3mROI; i++) {
+    cumulativeAdditionalAt3m += projectionData[i].improved - projectionData[i].current;
+  }
+  const investmentAt3m = croInvestment * monthsFor3mROI;
+  const roiAt3Months = investmentAt3m > 0 ? cumulativeAdditionalAt3m / investmentAt3m : 0;
+
   return {
     totalInvestment,
     totalAdditionalRevenue,
     roiMultiple,
     roiPercent,
     paybackMonths,
+    roiAt3Months,
   };
 }
 
