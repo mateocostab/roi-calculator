@@ -615,16 +615,16 @@ export function Calculator() {
               flexDirection: 'column',
               justifyContent: 'center',
             }}>
-              {/* Fire silhouette SVG background - realistic flames */}
+              {/* Fire silhouette SVG background - sharp dramatic flames */}
               <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
                 right: 0,
                 height: '100%',
-                opacity: 0.2,
+                opacity: 0.15,
                 pointerEvents: 'none',
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 150' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='flame1' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='50%25' stop-color='%23ff6b35'/%3E%3Cstop offset='100%25' stop-color='%23ffd700' stop-opacity='0.8'/%3E%3C/linearGradient%3E%3ClinearGradient id='flame2' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='100%25' stop-color='%23ff6b35'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23flame1)' d='M0 150 L0 120 Q5 100 15 110 L20 90 Q25 70 35 85 L40 60 Q50 30 60 55 L65 70 Q70 85 80 75 L85 50 Q95 20 105 45 L110 65 Q115 80 125 70 L130 40 Q140 10 150 35 L155 55 Q160 70 170 60 L175 30 Q185 5 195 25 L200 50 Q205 70 215 55 L220 25 Q230 0 240 20 L245 45 Q250 65 260 50 L265 25 Q275 5 285 30 L290 55 Q295 75 305 60 L310 35 Q320 15 330 40 L335 60 Q340 75 350 65 L355 45 Q365 25 375 50 L380 70 Q385 85 395 80 L400 95 L400 150 Z'/%3E%3Cpath fill='url(%23flame2)' d='M0 150 L0 130 Q10 115 20 125 L30 105 Q40 85 50 100 L60 80 Q70 60 80 75 L90 55 Q100 35 110 55 L120 70 Q130 85 140 75 L150 55 Q160 40 170 60 L180 75 Q190 90 200 80 L210 60 Q220 45 230 65 L240 80 Q250 95 260 85 L270 65 Q280 50 290 70 L300 85 Q310 100 320 90 L330 70 Q340 55 350 75 L360 90 Q370 105 380 95 L390 110 Q395 120 400 115 L400 150 Z'/%3E%3Cpath fill='%23ff8c00' opacity='0.6' d='M0 150 L0 135 Q15 125 30 132 L50 118 Q65 105 80 115 L100 100 Q115 88 130 98 L150 85 Q165 75 180 88 L200 95 Q215 105 230 98 L250 88 Q265 80 280 92 L300 100 Q315 110 330 102 L350 112 Q365 120 380 115 L400 125 L400 150 Z'/%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 180' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='f1' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ff4500'/%3E%3Cstop offset='40%25' stop-color='%23ff6b35'/%3E%3Cstop offset='80%25' stop-color='%23ffa500'/%3E%3Cstop offset='100%25' stop-color='%23ffd700'/%3E%3C/linearGradient%3E%3ClinearGradient id='f2' x1='0%25' y1='100%25' x2='0%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23cc3300'/%3E%3Cstop offset='100%25' stop-color='%23ff6b35'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23f1)' d='M0 180 L0 140 L8 130 L12 85 L18 120 L25 60 L32 100 L38 45 L45 80 L52 25 L60 70 L65 40 L72 90 L78 15 L88 65 L95 35 L102 80 L108 10 L118 55 L125 30 L132 75 L140 5 L150 50 L158 25 L165 70 L172 20 L182 60 L190 0 L200 45 L208 15 L218 55 L225 8 L235 48 L242 20 L252 62 L260 12 L270 52 L278 25 L288 68 L295 18 L305 58 L312 30 L322 72 L330 22 L340 65 L348 35 L358 78 L365 28 L375 70 L382 45 L392 85 L400 60 L400 180 Z'/%3E%3Cpath fill='url(%23f2)' d='M0 180 L0 145 L10 125 L15 95 L22 115 L30 75 L38 105 L45 65 L55 95 L62 55 L72 88 L80 50 L90 82 L98 45 L108 78 L118 40 L128 75 L138 48 L148 82 L158 52 L168 88 L178 58 L188 92 L198 62 L208 95 L218 68 L228 98 L238 72 L248 102 L258 78 L268 105 L278 82 L288 108 L298 88 L308 112 L318 92 L328 115 L338 98 L348 118 L358 102 L368 120 L378 108 L388 125 L400 115 L400 180 Z'/%3E%3Cpath fill='%23ff8c00' d='M0 180 L0 155 L20 140 L35 125 L50 138 L70 118 L90 132 L110 115 L130 128 L150 112 L170 125 L190 108 L210 122 L230 105 L250 120 L270 102 L290 118 L310 100 L330 115 L350 98 L370 112 L390 105 L400 120 L400 180 Z'/%3E%3C/svg%3E")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'bottom center',
                 backgroundSize: '100% auto',
@@ -647,11 +647,12 @@ export function Calculator() {
                 position: 'relative',
                 margin: 0,
                 fontSize: 11,
-                color: 'rgba(255, 180, 150, 0.7)',
-                marginBottom: 8,
+                color: 'rgba(255, 200, 170, 0.9)',
+                marginBottom: 10,
                 textTransform: 'uppercase',
-                letterSpacing: '0.5px',
-                fontWeight: 500,
+                letterSpacing: '1px',
+                fontWeight: 600,
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}>
                 {t('loss.title')}
               </p>
@@ -661,35 +662,35 @@ export function Calculator() {
                     margin: 0,
                     fontSize: 'clamp(24px, 3vw, 32px)',
                     fontWeight: 700,
-                    background: 'linear-gradient(180deg, #ffcc00 0%, #ff6b35 50%, #ff4500 100%)',
+                    background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     fontFamily: "'Space Mono', monospace",
-                    filter: 'drop-shadow(0 0 8px rgba(255, 107, 53, 0.3))',
+                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 150, 50, 0.4))',
                   }}>
                     {formatCurrency(calc.additionalMonthlyRevenue)}
                   </p>
-                  <p style={{ margin: '2px 0 0 0', fontSize: 11, color: 'rgba(255, 150, 100, 0.5)', fontWeight: 500 }}>
+                  <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.7)', fontWeight: 500 }}>
                     {t('loss.monthly')}
                   </p>
                 </div>
-                <div style={{ width: 1, height: 36, background: 'linear-gradient(180deg, transparent, rgba(255, 107, 53, 0.4), transparent)' }} />
+                <div style={{ width: 1, height: 40, background: 'linear-gradient(180deg, transparent, rgba(255, 150, 80, 0.5), transparent)' }} />
                 <div>
                   <p style={{
                     margin: 0,
                     fontSize: 'clamp(24px, 3vw, 32px)',
                     fontWeight: 700,
-                    background: 'linear-gradient(180deg, #ffcc00 0%, #ff6b35 50%, #ff4500 100%)',
+                    background: 'linear-gradient(180deg, #ffe066 0%, #ffaa33 40%, #ff6633 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     fontFamily: "'Space Mono', monospace",
-                    filter: 'drop-shadow(0 0 8px rgba(255, 107, 53, 0.3))',
+                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 150, 50, 0.4))',
                   }}>
                     {formatCurrency(calc.additionalMonthlyRevenue * 12)}
                   </p>
-                  <p style={{ margin: '2px 0 0 0', fontSize: 11, color: 'rgba(255, 150, 100, 0.5)', fontWeight: 500 }}>
+                  <p style={{ margin: '4px 0 0 0', fontSize: 11, color: 'rgba(255, 180, 130, 0.7)', fontWeight: 500 }}>
                     {t('loss.annually')}
                   </p>
                 </div>
