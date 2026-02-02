@@ -231,17 +231,18 @@ export function calculateROI(
 
   const roiPercent = roiMultiple * 100;
 
-  // Payback period - calculate using cumulative real revenue curve
+  // Payback period - calculate when cumulative revenue covers TOTAL investment
+  // This is more realistic: when do you recover your full commitment, not just one month
   let paybackMonths = Infinity;
   let accumulated = 0;
   for (let i = 0; i < projectionData.length; i++) {
     const monthAdditional = projectionData[i].improved - projectionData[i].current;
     accumulated += monthAdditional;
-    if (accumulated >= croInvestment && paybackMonths === Infinity) {
+    if (accumulated >= totalInvestment && paybackMonths === Infinity) {
       const prevAccumulated = accumulated - monthAdditional;
-      const needed = croInvestment - prevAccumulated;
+      const needed = totalInvestment - prevAccumulated;
       const fraction = monthAdditional > 0 ? needed / monthAdditional : 0;
-      paybackMonths = i + fraction; // i is 0-indexed, so i+fraction gives fractional months
+      paybackMonths = i + 1 + fraction; // +1 because months are 1-indexed for display
     }
   }
 

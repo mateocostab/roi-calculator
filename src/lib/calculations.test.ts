@@ -334,13 +334,13 @@ describe('calculateROI', () => {
     expect(result.roiPercent).toBeCloseTo(715.28, 2);
   });
 
-  it('calculates payback period using cumulative curve', () => {
-    // With croInvestment = 3000:
+  it('calculates payback period using cumulative curve vs TOTAL investment', () => {
+    // With croInvestment = 3000, months = 6: totalInvestment = 18000
     // Month 1: accumulated = 6250
-    // Need to find when accumulated >= 3000
-    // Month 1 additional = 6250, so payback = 3000/6250 = 0.48 months
+    // Month 2: accumulated = 21250 (exceeds 18000)
+    // Payback = 2 + (18000 - 6250) / 15000 = 2 + 0.78 = 2.78 months
     const result = calculateROI(3000, 6, 128750, mockProjectionData);
-    expect(result.paybackMonths).toBeCloseTo(0.48, 2);
+    expect(result.paybackMonths).toBeCloseTo(2.78, 1);
   });
 
   it('handles zero investment (ROI = 0)', () => {
