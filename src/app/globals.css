@@ -526,7 +526,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .tooltip-wrapper:hover .tooltip-content,
-.tooltip-wrapper:focus-within .tooltip-content {
+.tooltip-icon:focus-visible + .tooltip-content {
   opacity: 1;
   visibility: visible;
 }
