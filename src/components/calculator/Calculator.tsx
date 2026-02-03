@@ -308,8 +308,15 @@ export function Calculator() {
           </p>
 
           {/* ═══════════════ SOCIAL PROOF ═══════════════ */}
-          <div className="social-proof" style={{ marginTop: 40, marginBottom: 32 }}>
-            <p className="social-proof-text">{t('socialProof.trusted')}</p>
+          <div className="social-proof-container">
+            {/* Separator line */}
+            <div className="social-proof-separator" />
+
+            {/* Hero number */}
+            <p className="social-proof-number">+$30M USD</p>
+            <p className="social-proof-label">{language === 'es' ? 'en facturación desbloqueados para' : 'in revenue unlocked for'}</p>
+
+            {/* Logo strip */}
             <div className="logo-strip" role="list" aria-label="Client logos">
               <img src="/logos/lummia.png" alt="" className="client-logo" role="listitem" />
               <img src="/logos/coraje.svg" alt="" className="client-logo client-logo-tall" role="listitem" />

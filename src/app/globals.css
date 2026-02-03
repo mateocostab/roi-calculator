@@ -1153,18 +1153,46 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SOCIAL PROOF - Minimal & Clean
+   SOCIAL PROOF - Contained & Hierarchical
    ═══════════════════════════════════════════════════════════════ */
 
-.social-proof {
+.social-proof-container {
+  margin-top: 56px;
+  margin-bottom: 32px;
+  padding: 32px 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
   text-align: center;
+  position: relative;
 }
 
-.social-proof-text {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.35);
-  margin-bottom: 20px;
-  letter-spacing: 0.08em;
+.social-proof-separator {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.social-proof-number {
+  font-family: var(--font-mono);
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 700;
+  color: #00ff84;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 40px rgba(0, 255, 132, 0.3);
+}
+
+.social-proof-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 28px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   font-weight: 500;
 }
 
@@ -1173,19 +1201,19 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 32px 48px;
+  gap: 28px 40px;
 }
 
 .client-logo {
   height: 22px;
   width: auto;
   filter: brightness(0) invert(1);
-  opacity: 0.4;
+  opacity: 0.35;
   transition: opacity 0.2s ease;
 }
 
 .client-logo:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 /* Taller logos need more height to look balanced */
@@ -1195,12 +1223,25 @@ input[type="range"]::-moz-range-thumb {
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
+  .social-proof-container {
+    padding: 24px 20px;
+    margin-top: 40px;
+  }
+
+  .social-proof-separator {
+    top: -20px;
+  }
+
   .logo-strip {
-    gap: 24px 32px;
+    gap: 20px 28px;
   }
 
   .client-logo {
     height: 18px;
+  }
+
+  .client-logo-tall {
+    height: 26px;
   }
 }
 
