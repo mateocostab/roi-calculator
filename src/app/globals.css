@@ -1019,6 +1019,95 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   STICKY CTA BAR
+   ═══════════════════════════════════════════════════════════════ */
+
+.sticky-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 20px 24px;
+  background: linear-gradient(180deg, rgba(5, 5, 8, 0.85) 0%, rgba(5, 5, 8, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.sticky-cta-glow {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ff84, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(0, 255, 132, 0.5);
+}
+
+.sticky-cta-button {
+  width: 100%;
+  max-width: 400px;
+  padding: 18px 32px;
+  background: linear-gradient(135deg, #00ff84 0%, #00c05f 100%);
+  color: #00371d;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 255, 132, 0.3);
+}
+
+.sticky-cta-button:hover {
+  box-shadow:
+    0 8px 30px rgba(0, 255, 132, 0.4),
+    0 0 0 2px rgba(0, 255, 132, 0.3);
+  transform: translateY(-2px);
+}
+
+.sticky-cta-handle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta-button:hover {
+    transform: none;
+  }
+}
+
+/* Desktop: smaller bar */
+@media (min-width: 768px) {
+  .sticky-cta-bar {
+    padding: 12px 20px 16px;
+  }
+
+  .sticky-cta-button {
+    max-width: 320px;
+    padding: 14px 28px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  .sticky-cta-handle {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    LANGUAGE TOGGLE
    ═══════════════════════════════════════════════════════════════ */
 

@@ -1341,7 +1341,7 @@ export function Calculator() {
         </section>
 
         {/* ═══════════════ FOOTER ═══════════════ */}
-        <footer style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: 32 }}>
+        <footer style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: 32, paddingBottom: 100 }}>
           <p className="disclaimer">
             {language === 'es'
               ? '* Las proyecciones están basadas en resultados típicos de clientes de ConvertMate. Los resultados reales pueden variar según el producto, mercado y ejecución.'
@@ -1360,6 +1360,24 @@ export function Calculator() {
             </a>
           </p>
         </footer>
+      </div>
+
+      {/* ═══════════════ STICKY CTA BAR ═══════════════ */}
+      <div className="sticky-cta-bar">
+        {/* Top glow line */}
+        <div className="sticky-cta-glow" />
+
+        <a
+          href="https://convertmate.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sticky-cta-button"
+        >
+          {qualifiesForCRO ? t('qualification.croRecurringCta') : t('qualification.highConversionCta')}
+        </a>
+
+        {/* Bottom handle indicator */}
+        <div className="sticky-cta-handle" />
       </div>
     </div>
   );
