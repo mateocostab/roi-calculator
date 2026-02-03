@@ -1027,8 +1027,8 @@ input[type="range"]::-moz-range-thumb {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 600px;
+  width: calc(100% - 48px);
+  max-width: 900px;
   z-index: 1000;
   padding: 16px 20px 24px;
   background: linear-gradient(180deg, rgba(5, 5, 8, 0.85) 0%, rgba(5, 5, 8, 0.98) 100%);
