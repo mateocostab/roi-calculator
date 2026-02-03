@@ -337,10 +337,11 @@ export function Calculator() {
             <img src="/logos/dynamo.png" alt="Dynamo" className="client-logo" />
             <img src="/logos/coraje.png" alt="Coraje" className="client-logo" />
             <img src="/logos/ugreen.png" alt="UGREEN" className="client-logo" />
+            <img src="/logos/mumu.png" alt="Mumu" className="client-logo" />
+            <img src="/logos/the-gummy-box.png" alt="The Gummy Box" className="client-logo" />
             <img src="/logos/kiper.png" alt="Kiper" className="client-logo" />
             <img src="/logos/neat.png" alt="Neat" className="client-logo" />
             <img src="/logos/grupo-coomeva.png" alt="Grupo Coomeva" className="client-logo" />
-            <img src="/logos/gobernacion-valle.png" alt="Gobernación del Valle" className="client-logo" />
           </div>
         </div>
 
