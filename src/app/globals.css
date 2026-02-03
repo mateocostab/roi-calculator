@@ -470,6 +470,7 @@ input[type="range"]::-moz-range-thumb {
   height: 16px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
+  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -477,6 +478,13 @@ input[type="range"]::-moz-range-thumb {
   color: rgba(255, 255, 255, 0.5);
   font-weight: 600;
   flex-shrink: 0;
+  padding: 0;
+  font-family: inherit;
+}
+
+.tooltip-icon:focus {
+  outline: 2px solid #00ff84;
+  outline-offset: 2px;
 }
 
 .tooltip-icon-green {
@@ -724,6 +732,36 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
+/* Guarantee tabs - accessible styling */
+.guarantee-tab {
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.guarantee-tab:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.guarantee-tab:focus {
+  outline: 2px solid #00ff84;
+  outline-offset: -2px;
+}
+
+.guarantee-tab-active {
+  background: linear-gradient(90deg, rgba(0, 255, 132, 0.15) 0%, transparent 100%);
+  border-left-color: #00ff84;
+}
+
+.guarantee-tab-active:hover {
+  background: linear-gradient(90deg, rgba(0, 255, 132, 0.15) 0%, transparent 100%);
+}
+
 /* Guarantee buttons - horizontal scroll on mobile */
 @media (max-width: 900px) {
   .guarantees-list {
@@ -733,12 +771,17 @@ input[type="range"]::-moz-range-thumb {
     gap: 8px;
   }
 
-  .guarantees-list button {
+  .guarantee-tab {
     flex: 0 0 auto;
     padding: 12px 16px !important;
     border-radius: 8px !important;
     border-left: none !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .guarantee-tab-active {
+    background: rgba(0, 255, 132, 0.15) !important;
+    border-color: rgba(0, 255, 132, 0.4) !important;
   }
 }
 
@@ -1110,7 +1153,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SOCIAL PROOF
+   SOCIAL PROOF - Minimal & Clean
    ═══════════════════════════════════════════════════════════════ */
 
 .social-proof {
@@ -1118,10 +1161,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .social-proof-text {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 24px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 20px;
+  letter-spacing: 0.08em;
   font-weight: 500;
 }
 
@@ -1130,29 +1173,29 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 28px 40px;
+  gap: 32px 48px;
 }
 
 .client-logo {
-  height: 28px;
+  height: 22px;
   width: auto;
   filter: brightness(0) invert(1);
-  opacity: 0.75;
+  opacity: 0.4;
   transition: opacity 0.2s ease;
 }
 
 .client-logo:hover {
-  opacity: 1;
+  opacity: 0.7;
 }
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .logo-strip {
-    gap: 20px 28px;
+    gap: 24px 32px;
   }
 
   .client-logo {
-    height: 22px;
+    height: 18px;
   }
 }
 

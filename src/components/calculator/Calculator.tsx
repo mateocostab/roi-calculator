@@ -43,11 +43,17 @@ const parseFormattedNumber = (value: string) => {
   return isNaN(parsed) ? 0 : parsed;
 };
 
-// Tooltip component with hover
+// Tooltip component with hover - accessible button
 const InfoTooltip = ({ text, green }: { text: string; green?: boolean }) => (
   <span className="tooltip-wrapper">
-    <span className={`tooltip-icon ${green ? 'tooltip-icon-green' : ''}`} tabIndex={0}>?</span>
-    <span className="tooltip-content">{text}</span>
+    <button
+      type="button"
+      className={`tooltip-icon ${green ? 'tooltip-icon-green' : ''}`}
+      aria-label="More information"
+    >
+      ?
+    </button>
+    <span className="tooltip-content" role="tooltip">{text}</span>
   </span>
 );
 
@@ -304,29 +310,28 @@ export function Calculator() {
           {/* ═══════════════ SOCIAL PROOF ═══════════════ */}
           <div className="social-proof" style={{ marginTop: 40, marginBottom: 32 }}>
             <p className="social-proof-text">{t('socialProof.trusted')}</p>
-            <div className="logo-strip">
-              <img src="/logos/lummia.png" alt="Lummia" className="client-logo" />
-              <img src="/logos/dynamo.png" alt="Dynamo" className="client-logo" />
-              <img src="/logos/coraje.png" alt="Coraje" className="client-logo" />
-              <img src="/logos/ugreen.png" alt="UGREEN" className="client-logo" />
-              <img src="/logos/mumu.png" alt="Mumu" className="client-logo" />
-              <img src="/logos/the-gummy-box.png" alt="The Gummy Box" className="client-logo" />
-              <img src="/logos/kiper.png" alt="Kiper" className="client-logo" />
-              <img src="/logos/neat.png" alt="Neat" className="client-logo" />
-              <img src="/logos/grupo-coomeva.png" alt="Grupo Coomeva" className="client-logo" />
+            <div className="logo-strip" role="list" aria-label="Client logos">
+              <img src="/logos/mumu.svg" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/kiper.svg" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/neat.svg" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/ugreen.png" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/horase.svg" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/aluminati.svg" alt="" className="client-logo" role="listitem" />
             </div>
           </div>
 
           {/* Language & Currency Toggle */}
           <div className="header-toggles">
-            <div className="lang-toggle" style={{ display: 'inline-flex' }}>
+            <div className="lang-toggle" style={{ display: 'inline-flex' }} role="group" aria-label={t('header.language')}>
               <button
                 className={`lang-btn ${language === 'es' ? 'lang-btn-active' : ''}`}
                 onClick={() => setLanguage('es')}
+                aria-pressed={language === 'es'}
               >ES</button>
               <button
                 className={`lang-btn ${language === 'en' ? 'lang-btn-active' : ''}`}
                 onClick={() => setLanguage('en')}
+                aria-pressed={language === 'en'}
               >EN</button>
             </div>
 
@@ -335,6 +340,7 @@ export function Calculator() {
               value={currency}
               onChange={(e) => setCurrency(e.target.value as typeof currency)}
               className="currency-select"
+              aria-label={t('header.currency')}
             >
               {CURRENCIES.map((c) => (
                 <option key={c.code} value={c.code}>
@@ -398,6 +404,7 @@ export function Calculator() {
                 min={INPUT_RANGES.monthlyVisitors.min}
                 max={INPUT_RANGES.monthlyVisitors.max}
                 step={INPUT_RANGES.monthlyVisitors.step}
+                aria-label={t('inputs.visitors')}
               />
               <div className="slider-labels">
                 <span>{formatNumber(INPUT_RANGES.monthlyVisitors.min)}</span>
@@ -423,6 +430,7 @@ export function Calculator() {
                 min={INPUT_RANGES.currentCVR.min}
                 max={INPUT_RANGES.currentCVR.max}
                 step={INPUT_RANGES.currentCVR.step}
+                aria-label={t('inputs.cvr')}
               />
               <div className="slider-labels">
                 <span>{formatPercent(INPUT_RANGES.currentCVR.min)}</span>
@@ -451,6 +459,7 @@ export function Calculator() {
                 min={1}
                 max={ranges.aov.max}
                 step={ranges.aov.step || 1}
+                aria-label={t('inputs.aov')}
               />
               <div className="slider-labels">
                 <span>{currencyConfig.symbol}1</span>
@@ -479,6 +488,7 @@ export function Calculator() {
                 min={0}
                 max={ranges.adSpend.max}
                 step={ranges.adSpend.step || 1}
+                aria-label={t('inputs.adSpend')}
               />
               <div className="slider-labels">
                 <span>{currencyConfig.symbol}0</span>
@@ -985,6 +995,7 @@ export function Calculator() {
                 max={INPUT_RANGES.reinvestmentPercent.max}
                 step={INPUT_RANGES.reinvestmentPercent.step}
                 style={{ margin: 0 }}
+                aria-label={t('scaling.reinvestment')}
               />
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 8, lineHeight: 1.4 }}>
                 {t('scaling.reinvestmentDesc')}
@@ -1010,6 +1021,7 @@ export function Calculator() {
                 max={INPUT_RANGES.projectionMonths.max}
                 step={INPUT_RANGES.projectionMonths.step}
                 style={{ margin: 0 }}
+                aria-label={t('scaling.months')}
               />
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginTop: 8, lineHeight: 1.4 }}>
                 {t('scaling.monthsDesc')}
@@ -1237,35 +1249,17 @@ export function Calculator() {
           {/* Guarantees grid */}
           <div className="guarantees-grid">
             {/* Left: Guarantee list */}
-            <div className="guarantees-list" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div className="guarantees-list" style={{ display: 'flex', flexDirection: 'column', gap: 8 }} role="tablist" aria-label="Guarantees">
               {[1, 2, 3, 4, 5, 6, 7].map((num) => {
                 const isSelected = selectedGuarantee === num;
                 return (
                   <button
                     key={num}
                     onClick={() => setSelectedGuarantee(num)}
-                    style={{
-                      padding: '16px 20px',
-                      background: isSelected
-                        ? 'linear-gradient(90deg, rgba(0, 255, 132, 0.15) 0%, transparent 100%)'
-                        : 'transparent',
-                      border: 'none',
-                      borderLeft: isSelected ? '3px solid #00ff84' : '3px solid transparent',
-                      borderRadius: '0 8px 8px 0',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      transition: 'all 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isSelected) {
-                        e.currentTarget.style.background = 'transparent';
-                      }
-                    }}
+                    role="tab"
+                    aria-selected={isSelected}
+                    aria-controls={`guarantee-panel-${num}`}
+                    className={`guarantee-tab ${isSelected ? 'guarantee-tab-active' : ''}`}
                   >
                     <span style={{
                       fontSize: 15,
@@ -1280,12 +1274,17 @@ export function Calculator() {
             </div>
 
             {/* Right: Selected guarantee description */}
-            <div style={{
-              padding: 32,
-              background: 'rgba(255, 255, 255, 0.02)',
-              borderRadius: 16,
-              border: '1px solid rgba(255, 255, 255, 0.05)',
-            }}>
+            <div
+              id={`guarantee-panel-${selectedGuarantee}`}
+              role="tabpanel"
+              aria-labelledby={`guarantee-tab-${selectedGuarantee}`}
+              style={{
+                padding: 32,
+                background: 'rgba(255, 255, 255, 0.02)',
+                borderRadius: 16,
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+              }}
+            >
               <div>
                 <p style={{
                   fontSize: 18,
