@@ -1,10 +1,11 @@
 export const es = {
   // Header
+  'header.pretitle': 'Calculadora de ROI para CRO',
   'header.title': '¿Cuánto dinero estás dejando en la mesa?',
   'header.titleBefore': '¿Cuánto dinero estás ',
   'header.titleHighlight': 'dejando en la mesa',
   'header.titleAfter': '?',
-  'header.subtitle': 'Calculadora de ROI para CRO',
+  'header.subtitle': 'Descubre el potencial de optimizar tu tasa de conversión',
   'header.language': 'Idioma',
   'header.currency': 'Moneda',
 

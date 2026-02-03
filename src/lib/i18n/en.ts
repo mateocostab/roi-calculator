@@ -2,11 +2,12 @@ import type { TranslationKey } from './es';
 
 export const en: Record<TranslationKey, string> = {
   // Header
+  'header.pretitle': 'CRO ROI Calculator',
   'header.title': 'How much money are you leaving on the table?',
   'header.titleBefore': 'How much money are you ',
   'header.titleHighlight': 'leaving on the table',
   'header.titleAfter': '?',
-  'header.subtitle': 'CRO ROI Calculator',
+  'header.subtitle': 'Discover the potential of optimizing your conversion rate',
   'header.language': 'Language',
   'header.currency': 'Currency',
 

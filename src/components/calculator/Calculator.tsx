@@ -261,6 +261,18 @@ export function Calculator() {
             />
           </div>
 
+          {/* Pre-title */}
+          <p style={{
+            fontSize: 13,
+            fontWeight: 500,
+            color: 'rgba(255,255,255,0.4)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            marginBottom: 12,
+          }}>
+            {t('header.pretitle')}
+          </p>
+
           {/* Title */}
           <h1 style={{
             fontSize: 'clamp(36px, 6vw, 56px)',
