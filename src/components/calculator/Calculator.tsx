@@ -309,44 +309,23 @@ export function Calculator() {
 
           {/* ═══════════════ SOCIAL PROOF ═══════════════ */}
           <div style={{
-            marginTop: 56,
+            marginTop: 48,
             marginBottom: 32,
-            padding: '32px 40px',
-            background: 'rgba(255, 255, 255, 0.03)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: 20,
+            padding: '24px 32px',
+            background: 'rgba(255, 255, 255, 0.02)',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
+            borderRadius: 16,
             textAlign: 'center',
-            position: 'relative',
           }}>
-            {/* Separator line */}
-            <div style={{
-              position: 'absolute',
-              top: -28,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: 60,
-              height: 1,
-              background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
-            }} />
-
-            {/* Hero number */}
+            {/* Single line text */}
             <p style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 'clamp(36px, 6vw, 52px)',
-              fontWeight: 700,
-              color: '#00ff84',
-              margin: '0 0 6px 0',
-              letterSpacing: '-0.02em',
-              textShadow: '0 0 40px rgba(0, 255, 132, 0.4)',
-            }}>+$30M USD</p>
-            <p style={{
-              fontSize: 13,
-              color: 'rgba(255, 255, 255, 0.45)',
-              margin: '0 0 32px 0',
+              fontSize: 11,
+              color: 'rgba(255, 255, 255, 0.4)',
+              margin: '0 0 20px 0',
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
               fontWeight: 500,
-            }}>{language === 'es' ? 'en facturación desbloqueados para' : 'in revenue unlocked for'}</p>
+            }}>{t('socialProof.trusted')}</p>
 
             {/* Logo strip */}
             <div className="logo-strip" role="list" aria-label="Client logos">
