@@ -1188,6 +1188,11 @@ input[type="range"]::-moz-range-thumb {
   opacity: 0.7;
 }
 
+/* Taller logos need more height to look balanced */
+.client-logo-tall {
+  height: 32px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .logo-strip {
