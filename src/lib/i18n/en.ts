@@ -6,7 +6,7 @@ export const en: Record<TranslationKey, string> = {
   'header.titleBefore': 'How much money are you ',
   'header.titleHighlight': 'leaving on the table',
   'header.titleAfter': '?',
-  'header.subtitle': 'Enter your numbers. See what you could be making.',
+  'header.subtitle': 'CRO ROI Calculator',
   'header.language': 'Language',
   'header.currency': 'Currency',
 

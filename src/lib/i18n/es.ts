@@ -4,7 +4,7 @@ export const es = {
   'header.titleBefore': '¿Cuánto dinero estás ',
   'header.titleHighlight': 'dejando en la mesa',
   'header.titleAfter': '?',
-  'header.subtitle': 'Ingresa tus números. Descubre cuánto podrías estar facturando.',
+  'header.subtitle': 'Calculadora de ROI para CRO',
   'header.language': 'Idioma',
   'header.currency': 'Moneda',
 
