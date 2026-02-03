@@ -120,7 +120,7 @@ export const es = {
   'format.lessThanOneMonth': '< 1 mes',
 
   // Social proof
-  'socialProof.trusted': '+$30M USD generados para marcas como',
+  'socialProof.trusted': '+$30M USD EN FACTURACIÓN DESBLOQUEADOS PARA',
 
   // Footer
   'footer.poweredBy': 'Desarrollado por',

@@ -301,8 +301,24 @@ export function Calculator() {
             {t('header.subtitle')}
           </p>
 
+          {/* ═══════════════ SOCIAL PROOF ═══════════════ */}
+          <div className="social-proof" style={{ marginTop: 40, marginBottom: 32 }}>
+            <p className="social-proof-text">{t('socialProof.trusted')}</p>
+            <div className="logo-strip">
+              <img src="/logos/lummia.png" alt="Lummia" className="client-logo" />
+              <img src="/logos/dynamo.png" alt="Dynamo" className="client-logo" />
+              <img src="/logos/coraje.png" alt="Coraje" className="client-logo" />
+              <img src="/logos/ugreen.png" alt="UGREEN" className="client-logo" />
+              <img src="/logos/mumu.png" alt="Mumu" className="client-logo" />
+              <img src="/logos/the-gummy-box.png" alt="The Gummy Box" className="client-logo" />
+              <img src="/logos/kiper.png" alt="Kiper" className="client-logo" />
+              <img src="/logos/neat.png" alt="Neat" className="client-logo" />
+              <img src="/logos/grupo-coomeva.png" alt="Grupo Coomeva" className="client-logo" />
+            </div>
+          </div>
+
           {/* Language & Currency Toggle */}
-          <div className="header-toggles" style={{ marginTop: 32 }}>
+          <div className="header-toggles">
             <div className="lang-toggle" style={{ display: 'inline-flex' }}>
               <button
                 className={`lang-btn ${language === 'es' ? 'lang-btn-active' : ''}`}
@@ -328,22 +344,6 @@ export function Calculator() {
             </select>
           </div>
         </header>
-
-        {/* ═══════════════ SOCIAL PROOF ═══════════════ */}
-        <div className="social-proof animate-in" style={{ marginBottom: 48 }}>
-          <p className="social-proof-text">{t('socialProof.trusted')}</p>
-          <div className="logo-strip">
-            <img src="/logos/lummia.png" alt="Lummia" className="client-logo" />
-            <img src="/logos/dynamo.png" alt="Dynamo" className="client-logo" />
-            <img src="/logos/coraje.png" alt="Coraje" className="client-logo" />
-            <img src="/logos/ugreen.png" alt="UGREEN" className="client-logo" />
-            <img src="/logos/mumu.png" alt="Mumu" className="client-logo" />
-            <img src="/logos/the-gummy-box.png" alt="The Gummy Box" className="client-logo" />
-            <img src="/logos/kiper.png" alt="Kiper" className="client-logo" />
-            <img src="/logos/neat.png" alt="Neat" className="client-logo" />
-            <img src="/logos/grupo-coomeva.png" alt="Grupo Coomeva" className="client-logo" />
-          </div>
-        </div>
 
         {/* ═══════════════ INPUTS ═══════════════ */}
         <section className="glass-card animate-in delay-1" style={{ padding: 32, marginBottom: 24 }}>
