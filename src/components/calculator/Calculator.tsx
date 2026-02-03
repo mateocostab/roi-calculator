@@ -312,14 +312,13 @@ export function Calculator() {
             <p className="social-proof-text">{t('socialProof.trusted')}</p>
             <div className="logo-strip" role="list" aria-label="Client logos">
               <img src="/logos/lummia.png" alt="" className="client-logo" role="listitem" />
-              <img src="/logos/coraje.png" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/coraje.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/dynamo.png" alt="" className="client-logo" role="listitem" />
               <img src="/logos/mumu.svg" alt="" className="client-logo" role="listitem" />
-              <img src="/logos/the-gummy-box.png" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/the-gummy-box.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/kiper.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/neat.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/ugreen.png" alt="" className="client-logo" role="listitem" />
-              <img src="/logos/horase.svg" alt="" className="client-logo" role="listitem" />
             </div>
           </div>
 
