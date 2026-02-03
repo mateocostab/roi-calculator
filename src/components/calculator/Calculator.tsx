@@ -315,6 +315,7 @@ export function Calculator() {
               <img src="/logos/coraje.png" alt="" className="client-logo" role="listitem" />
               <img src="/logos/dynamo.png" alt="" className="client-logo" role="listitem" />
               <img src="/logos/mumu.svg" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/the-gummy-box.png" alt="" className="client-logo" role="listitem" />
               <img src="/logos/kiper.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/neat.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/ugreen.png" alt="" className="client-logo" role="listitem" />
