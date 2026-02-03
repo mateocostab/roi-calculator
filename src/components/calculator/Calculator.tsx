@@ -775,6 +775,36 @@ export function Calculator() {
               </p>
             </div>
           </div>
+
+          {/* CTA after loss/impact section */}
+          <a
+            href={calc.qualificationTier === 'cro_recurring'
+              ? 'https://calendly.com/convertmate/cro-recurring'
+              : 'https://calendly.com/convertmate/high-conversion-ecom'
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-button-primary"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              marginTop: 24,
+              padding: '16px 32px',
+              background: 'linear-gradient(135deg, #00ff84 0%, #00c05f 100%)',
+              borderRadius: 12,
+              color: '#00371d',
+              fontWeight: 700,
+              fontSize: 15,
+              textDecoration: 'none',
+              boxShadow: '0 4px 20px rgba(0, 255, 132, 0.3)',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            {t('cta.stopLosing')}
+            <span style={{ fontSize: 18 }}>→</span>
+          </a>
         </section>
 
         {/* ═══════════════ EFFICIENCY METRICS ═══════════════ */}

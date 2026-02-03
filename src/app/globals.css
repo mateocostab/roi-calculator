@@ -1005,6 +1005,19 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
 }
 
+.cta-button-primary:hover {
+  box-shadow:
+    0 8px 30px rgba(0, 255, 132, 0.4),
+    0 0 0 2px rgba(0, 255, 132, 0.3);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-button-primary:hover {
+    transform: none;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    LANGUAGE TOGGLE
    ═══════════════════════════════════════════════════════════════ */

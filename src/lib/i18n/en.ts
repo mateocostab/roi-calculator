@@ -2,11 +2,11 @@ import type { TranslationKey } from './es';
 
 export const en: Record<TranslationKey, string> = {
   // Header
-  'header.title': 'CRO ROI Calculator',
-  'header.titleBefore': '',
-  'header.titleHighlight': 'CRO',
-  'header.titleAfter': ' ROI Calculator',
-  'header.subtitle': 'Discover the potential of optimizing your conversion rate',
+  'header.title': 'How much money are you leaving on the table?',
+  'header.titleBefore': 'How much money are you ',
+  'header.titleHighlight': 'leaving on the table',
+  'header.titleAfter': '?',
+  'header.subtitle': 'Enter your numbers. See what you could be making.',
   'header.language': 'Language',
   'header.currency': 'Currency',
 
@@ -99,6 +99,9 @@ export const en: Record<TranslationKey, string> = {
   // Actions
   'actions.reset': 'Reset',
   'actions.resetTooltip': 'Reset to default values',
+
+  // CTA
+  'cta.stopLosing': 'Stop leaving money on the table',
 
   // Qualification
   'qualification.title': 'Your Recommendation',

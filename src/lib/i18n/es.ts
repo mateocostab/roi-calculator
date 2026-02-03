@@ -1,10 +1,10 @@
 export const es = {
   // Header
-  'header.title': 'Calculadora de ROI para CRO',
-  'header.titleBefore': 'Calculadora de ROI para ',
-  'header.titleHighlight': 'CRO',
-  'header.titleAfter': '',
-  'header.subtitle': 'Descubre el potencial de optimizar tu tasa de conversión',
+  'header.title': '¿Cuánto dinero estás dejando en la mesa?',
+  'header.titleBefore': '¿Cuánto dinero estás ',
+  'header.titleHighlight': 'dejando en la mesa',
+  'header.titleAfter': '?',
+  'header.subtitle': 'Ingresa tus números. Descubre cuánto podrías estar facturando.',
   'header.language': 'Idioma',
   'header.currency': 'Moneda',
 
@@ -97,6 +97,9 @@ export const es = {
   // Actions
   'actions.reset': 'Reiniciar',
   'actions.resetTooltip': 'Restablecer valores predeterminados',
+
+  // CTA
+  'cta.stopLosing': 'Deja de perder dinero',
 
   // Qualification
   'qualification.title': 'Tu Recomendación',
