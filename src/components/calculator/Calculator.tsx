@@ -311,12 +311,14 @@ export function Calculator() {
           <div className="social-proof" style={{ marginTop: 40, marginBottom: 32 }}>
             <p className="social-proof-text">{t('socialProof.trusted')}</p>
             <div className="logo-strip" role="list" aria-label="Client logos">
+              <img src="/logos/lummia.png" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/coraje.png" alt="" className="client-logo" role="listitem" />
+              <img src="/logos/dynamo.png" alt="" className="client-logo" role="listitem" />
               <img src="/logos/mumu.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/kiper.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/neat.svg" alt="" className="client-logo" role="listitem" />
               <img src="/logos/ugreen.png" alt="" className="client-logo" role="listitem" />
               <img src="/logos/horase.svg" alt="" className="client-logo" role="listitem" />
-              <img src="/logos/aluminati.svg" alt="" className="client-logo" role="listitem" />
             </div>
           </div>
 
