@@ -122,7 +122,7 @@ export const en: Record<TranslationKey, string> = {
   'format.lessThanOneMonth': '< 1 month',
 
   // Social proof
-  'socialProof.trusted': 'Used by brands generating +$1M/year',
+  'socialProof.trusted': '+$30M USD generated for brands like',
 
   // Footer
   'footer.poweredBy': 'Powered by',
