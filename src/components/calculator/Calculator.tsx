@@ -1302,7 +1302,7 @@ export function Calculator() {
                 {t('qualification.croRecurringDesc')}
               </p>
               <a
-                href="https://convertmate.co"
+                href="https://calendly.com/mateocosta/ecom?utm_source=roi-calculator&utm_medium=web&utm_campaign=cro&utm_content=cro-recurring"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
@@ -1338,7 +1338,7 @@ export function Calculator() {
               </div>
 
               <a
-                href="https://convertmate.co"
+                href="https://calendly.com/mateocosta/ecom?utm_source=roi-calculator&utm_medium=web&utm_campaign=cro&utm_content=high-conversion"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"
@@ -1380,7 +1380,10 @@ export function Calculator() {
         <div className="sticky-cta-glow" />
 
         <a
-          href="https://convertmate.co"
+          href={qualifiesForCRO
+            ? 'https://calendly.com/mateocosta/ecom?utm_source=roi-calculator&utm_medium=web&utm_campaign=cro&utm_content=cro-recurring-sticky'
+            : 'https://calendly.com/mateocosta/ecom?utm_source=roi-calculator&utm_medium=web&utm_campaign=cro&utm_content=high-conversion-sticky'
+          }
           target="_blank"
           rel="noopener noreferrer"
           className="sticky-cta-button"
