@@ -1110,6 +1110,59 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   SOCIAL PROOF
+   ═══════════════════════════════════════════════════════════════ */
+
+.social-proof {
+  text-align: center;
+}
+
+.social-proof-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.logo-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px 32px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.logo-strip:hover {
+  opacity: 0.85;
+}
+
+.client-logo {
+  height: 24px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.client-logo:hover {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .logo-strip {
+    gap: 16px 24px;
+  }
+
+  .client-logo {
+    height: 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    LANGUAGE TOGGLE
    ═══════════════════════════════════════════════════════════════ */
 

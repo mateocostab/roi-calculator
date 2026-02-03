@@ -119,6 +119,9 @@ export const es = {
   'format.months': 'meses',
   'format.lessThanOneMonth': '< 1 mes',
 
+  // Social proof
+  'socialProof.trusted': 'Utilizado por marcas que facturan +$1M/año',
+
   // Footer
   'footer.poweredBy': 'Desarrollado por',
   'footer.brand': 'ConvertMate',

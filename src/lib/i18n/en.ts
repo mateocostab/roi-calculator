@@ -121,6 +121,9 @@ export const en: Record<TranslationKey, string> = {
   'format.months': 'months',
   'format.lessThanOneMonth': '< 1 month',
 
+  // Social proof
+  'socialProof.trusted': 'Used by brands generating +$1M/year',
+
   // Footer
   'footer.poweredBy': 'Powered by',
   'footer.brand': 'ConvertMate',
